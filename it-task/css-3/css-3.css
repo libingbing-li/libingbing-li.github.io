@@ -1,0 +1,36 @@
+body{
+    background: rgb(104, 205, 213);
+    margin: 0px;
+}
+.left{
+    display: block;
+    margin: 20px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.logo{
+    display: block;
+    margin: 15vh auto;
+}
+.text{
+    width: 80%;
+    margin: auto;
+
+    font-size: 25px;
+    color: white;
+}
+.btn{
+    width: 50%;
+    display: inline-block;
+
+    margin-top:20vh;
+    text-align: center;
+}
+.btn2{
+    margin-left: -5px;
+}
+.btn-img{
+    display:block;
+    margin: auto;
+}
