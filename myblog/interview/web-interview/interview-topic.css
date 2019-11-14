@@ -1,0 +1,120 @@
+html{
+	background: #FFFFCC;
+	font-size: 100%;
+}
+
+header{
+	background: #dcff93;
+	border: solid 10px seagreen;
+	
+	font-weight: bold;
+	padding: 10px;
+	
+	margin-top: 40px;
+}
+header a{
+	color: #006400;
+}
+#nav{
+	background: seagreen;
+	width: 500px;
+	border-top: solid 10px seagreen;
+	border-bottom: solid 10px seagreen;
+	border-left: solid 5px seagreen;
+	border-right: solid 5px seagreen;
+	height: 30px;
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	left: 0px;
+	margin: 0px auto;
+}
+#nav ul{
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	
+	display: flex;
+	justify-content: space-around;
+}
+#nav li{
+	width: 90px;
+	height: 30px;
+	background: #dcff93;
+	text-align: center;
+	line-height: 30px;
+}
+#nav a{
+	text-decoration: none;
+	color: seagreen;
+	font-weight: bolder;
+}
+
+/* 主体 */
+.h1{
+	background: #dcff93;
+	border: solid 7px seagreen;
+	
+	margin: 15px auto 0px auto;
+	
+	text-align: center;
+	width: 300px;
+}
+
+.show{
+	width: 95vw;
+	background: #dcff93;
+	border: solid 7px seagreen;
+	font-size: 23px;
+	font-weight: bolder;
+	display: block;
+	padding: 0px;
+	margin: 10px auto;
+	text-align: center;
+}
+.hide{
+	background: none;
+	border: none;
+	font-size: large;
+	font-weight: bolder;
+	color:seagreen;
+	display: block;
+	margin: 0px auto 5px auto;
+}
+.mark{
+	border-bottom: solid 5px seagreen;
+}
+.mark0{
+	background: mediumseagreen;
+	text-decoration: none;
+	color: black;
+}
+.answer-body,.hide{
+	clear: right;
+}
+.more{
+	color: #006400;
+	float: right;
+}
+.add{
+	width: 70%;
+	background: lightcyan;
+	border: solid 3px lightgreen ;
+	margin: auto;
+	
+	font-size: 15px;
+	font-weight: bold;
+	color: darkgreen;
+}
+.answer{
+	width: 95vw;
+	box-sizing: border-box;
+	background: #dcff93;
+	border: solid 7px seagreen;
+	
+	font-weight: bold;
+	padding: 0px 10px;
+	margin: auto;
+	
+/* 	display: none; */
+}

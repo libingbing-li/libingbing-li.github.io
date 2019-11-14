@@ -1,0 +1,339 @@
+/* flex */
+.title{
+	border-bottom: solid 15px crimson;
+	text-align: center;
+}
+.dice-title,.basic-grid-title{
+	border-bottom: solid 12px salmon;
+}
+.dice-explain,.basic-grid-explain,.explain{
+	border-bottom:solid 10px firebrick ;
+}
+.basic-grid-code,.dice-html,.dice-css,.holy-grail-code,#flex-input-code,#flex-bottom-code,#flex-flow-code{
+	background: black;
+	color: white;
+}
+.basic-grid-code,.holy-grail-code,#flex-input-code,#flex-bottom-code,#flex-flow-code{
+	display: flex;
+	justify-content: space-around;
+	margin-top: 10px;
+}
+
+/* 骰子 */
+.dice{
+	width: 150px;
+	height: 150px;
+	background: black;
+	display: flex;
+	align-items: center;
+}
+.dice-box{
+	width:90px;
+	height: 90px;
+	background: white;
+	border-radius: 5px;
+	margin: auto;
+	padding: 10px;
+}
+.dice-item{
+	width: 30px;
+	height: 30px;
+	background: black;
+	border-radius: 15px;
+}
+.dice-html,.dice-css{
+	height: 150px;
+	width: 150px;
+}
+
+.dice-1,.dice-2,.dice-3{
+	border:solid 3px #000000;
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+/* 单项目 */
+
+#dice-box-10{
+	display: flex;
+}
+#dice-box-11{
+	display: flex;
+	justify-content: center;
+}
+#dice-box-12{
+	display: flex;
+	justify-content: flex-end;
+}
+#dice-box-13{
+	display: flex;
+	align-items: center;
+}
+#dice-box-14{
+	display: flex;
+	align-items: flex-end;
+}
+#dice-box-15{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* 双项目 */
+#dice-box-20{
+	display: flex;
+	justify-content: space-between;
+}
+#dice-box-21{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+#dice-box-22{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+#dice-box-23{
+	display: flex;
+}
+#dice-item-231{
+	align-self: center;
+}
+#dice-box-24{
+	display: flex;
+	justify-content: space-between;
+}
+#dice-item-241{
+	align-self: flex-end;
+}
+/* 三以上 */
+#dice-box-30{
+	display: flex;
+	flex-direction: column;
+}
+#dice-item-301{
+	align-self: center;
+}
+#dice-item-302{
+	align-self: flex-end;
+}
+#dice-box-40{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	align-content: space-between;
+}
+#dice-box-41{
+	display: flex;
+	flex-wrap: wrap;
+	align-content: space-between;
+}
+#dice-column-410,#dice-column-411{
+	flex-basis: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+#dice-box-60{
+	display: flex;
+	flex-wrap: wrap;
+	align-content: space-between;
+}
+#dice-box-61{
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-content: space-between;
+}
+#dice-box-62{
+	display: flex;
+	flex-wrap: wrap;
+}
+#dice-row-620,#dice-row-621,#dice-row-622{
+	flex-basis: 100%;
+	display: flex;
+}
+#dice-row-621{
+	justify-content: center;
+}
+#dice-row-622{
+	justify-content: space-between;
+}
+#dice-box-90{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+/* 网格布局 */
+.basic-grid-example{
+	background: white;
+	width: inherit;
+}
+
+.basic-grid-example-cell-item{
+	border: solid 1px lightgrey;
+	margin: 3px;
+	background: lightgray;
+}
+.basic-grid-code{
+	margin-top: 10px;
+	width: inherit;
+}
+
+/* 基本网格 */
+#basic-grid-example-1{
+	display: flex;
+	flex-wrap: wrap;
+}
+.basic-grid-example-cell-1{
+	display: flex;
+	flex-basis: 100%;
+}
+.basic-grid-example-cell-item-1{
+	flex: 1;
+}
+/* 百分比网络 */
+#basic-grid-example-2{
+	display: flex;
+	flex-wrap: wrap;
+}
+.basic-grid-example-cell-2{
+	display: flex;
+	flex-basis: 100%;
+}
+.basic-grid-example-cell-item-2-auto{
+	flex: 1;
+}
+.basic-grid-example-cell-item-2-2{
+	flex: 0 0 50%;
+}
+.basic-grid-example-cell-item-2-3{
+	flex: 0 0 33.33333%;
+}
+.basic-grid-example-cell-item-2-4{
+	flex: 0 0 25%;
+}
+
+/* 圣杯布局 */
+.holy-grail-example{
+	width: inherit;
+	background: white;
+	
+	display: flex;
+	flex-direction: column;
+	min-height: 30vh;
+}
+#holy-grail-example-header,#holy-grail-example-footer{
+	background: grey;
+	text-align: center;
+	flex: 1;
+}
+#holy-grail-example-body{
+	flex: 4;
+	display: flex;
+	
+	text-align: center;
+}
+#body-main{
+	flex: 1;
+	background: lightgray;
+}
+#body-nav,#body-aside{
+	background: skyblue;
+	flex: 0 0 12em;
+}
+#body-nav{
+	order: -1;
+}
+#body-aside{
+	background: orangered;
+}
+@media (max-width:400px) {
+	#holy-grail-example-body{
+		flex-direction: column;
+		flex: 4;
+	}
+	#body-nav,#body-aside{
+		flex: auto;
+	}
+	#body-main{
+		flex: 3;
+	}
+}
+
+/* 输入框 */
+#flex-input-example{
+	display: flex;
+}
+#flex-input-example-input{
+	flex: 1;
+}
+/* 悬挂式 */
+#flex-hang-example{
+	background: white;
+	display: flex;
+	align-items: flex-start;
+	padding: 10px;
+}
+#flex-hang-example-img{
+	margin-right: 1em;
+	margin-top: 25px;
+}
+#flex-hang-example-body{
+	flex:1;
+}
+
+/* 固定底栏 */
+#flex-bottom-example{
+	width: inherit;
+	background: white;
+	
+	display: flex;
+	min-height: 30vh;
+	flex-direction: column;
+}
+#flex-bottom-example-main{
+	flex: 1;
+}
+#flex-bottom-example-footer,#flex-bottom-example-header{
+	background: gray;
+	height: 30px;
+	
+	line-height: 30px;
+	text-align: center;
+}
+/* 流式布局 */
+.flex-flow-example-item{
+	border: solid 1px red;
+	background: white;
+	
+	flex: 0 0 25%;
+	height: 50px;
+	
+	box-sizing: border-box;
+}
+#flex-flow-example{
+	display: flex;
+	justify-content: space-around;
+	height: 150px;
+	
+}
+#flex-flow-example-1,#flex-flow-example-2{
+	background: black;
+	width: 200px;
+	height: 150px;
+	
+	display: flex;
+	flex-flow: row wrap;
+	align-content: flex-start;
+}
+	background: black;
+}
+
+
+
+
+
+

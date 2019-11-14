@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>CSS布局</title>
+		<link rel="stylesheet" href="study-layout.css">
+		<link rel="stylesheet" href="flex-study-layout.css">
+	</head>
+	<body>
+		<!-- 总 -->
+		<header class="header" id="top">
+			<h1>CSS布局方式</h1>
+			<p>css2 定义了四种布局：<a href="table-study-layout.html">table布局</a>、float布局、<a href="../css-drawing/index.html">盒定位</a></p>
+			<p>css3 引入了新的布局：<a href="flex-study-layout.html">flex布局</a></p>
+			<p>响应式布局(应对兼容性以及移动端问题)</p>
+			<p><a href="index.html">Grid布局</a></p>
+		</header>
+		
+		<!-- 目录 -->
+		
+		<div id="directory">
+			<div id="directory-show">
+				<button type="button" id="directory-b-show">目录</button>
+				<button type="button" id="directory-b-hide"></button>
+			</div>
+			
+			<ul id="directory-hide">
+				<li class="d1"><a href="#top" class="d1-show">Top</a></li>
+				<li class="d1">
+					<a href="#flex-grammar"  class="d1-show">flex语法</a> <button type="button" class="button" id="button-1"></button> <br>
+					<ul class="d1-hide" id="d1-hide-1">
+						<li class="d2">
+							<a href="#flex-box-attribute">容器属性</a>
+						</li>
+						<li class="d2">
+							<a href="#flex-item-attribute">项目属性</a>
+						</li>
+					</ul>
+				</li>
+				<li class="d1">
+					<a href="#flex-layout" class="d1-show">flex布局</a> <button type="button" class="button" id="button-2"></button><br>
+					<ul class="d1-hide" id="d1-hide-2">
+						<li class="d2"><a href="#flex-dice">骰子布局</a></li>
+						<li class="d2"><a href="#flex-basic-grid">基本网格布局</a></li>
+						<li class="d2"><a href="#flex-holy-grail">圣杯布局</a></li>
+						<li class="d2"><a href="#flex-input">输入框布局</a></li>
+						<li class="d2"><a href="#flex-hang">悬挂式布局</a></li>
+						<li class="d2"><a href="#flex-bottom">固定底栏</a></li>
+						<li class="d2"><a href="#flex-flow">流式布局</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- flex布局 -->
+		<div id="flex">
+			<h1 class="h1">Flex</h1>
+			<div class="introduce">
+			Flex布局是弹性布局(Flexible Box)，为盒模型提供最大的灵活性。<br>
+			任何一个容器或行内元素都可以指定为flex布局。<br>
+			设为flex布局后，子元素的float、clear、vertical-align属性失效。
+			</div>
+			<div class="introduce">
+				采用flex布局的元素，称为flex容器(flex container)，简称容器。<br>
+				容器的所有子元素自动成为容器成员，称为flex项目(flex item)，简称项目。<br>
+				<br>
+				容器默认存在两根轴：
+				<ul>
+					<li>
+						水平的主轴 (main axis)
+						<li>   主轴的开始位置 (main start) 是与边框的交叉点</li>
+						<li>   主轴的结束位置 (main end)</li>
+					</li>
+					<li>
+						垂直的交叉轴 (cross axis)
+						<li>   交叉轴的开始位置 (cross start)</li>
+						<li>   交叉轴的结束位置 (cross end)</li>
+					</li>
+				</ul>
+				<br>
+				项目默认沿主轴排列，单个项目占据空间称为：
+				<ul>
+					<li>主轴空间 (main size)</li>
+					<li>交叉轴空间 (cross size)</li>
+				</ul>
+				<br>
+				<img src="layout-images/flex1.png" alt="概念图">
+			</div>
+			
+			<h2 class="h2" id="flex-grammar">Flex语法</h2>
+			<div class="flex">
+				<table>
+					<caption>指定为Flex布局</caption>
+					<tr>
+						<th>块元素</th>
+						<td>
+							.box{
+								display: flex;
+							}
+						</td>
+					</tr>
+					<tr>
+						<th>行内元素</th>
+						<td>
+							.box{
+								display: inline-flex;
+							}
+						</td>
+					</tr>
+					<tr>
+						<th>Webkit内核的浏览器</th>
+						<td>
+							.box{
+								display: -webkit-flex;
+								display: flex;
+								/*保证兼容性*/
+							}
+						</td>
+					</tr>
+				</table>
+				<table id="flex-box-attribute">
+					<caption>容器属性</caption>
+					<tr>
+						<!-- 属性名 -->
+						<th rowspan="4">
+							flex-direction <br>
+							即项目的排列方向 <br>
+							决定主轴的方向 <br>
+							【derection:方向】 
+						</th>
+						<!-- 属性值 -->
+						<td>row(默认)</td>
+						<!-- 属性值意义 -->
+						<td>主轴为水平方向，起点在左端</td>
+						<!-- 示意图 -->
+						<td><img src="layout-images/flex-container-attribute-1-1.PNG"></td>
+					</tr>
+					<tr>
+						<td>
+							row-reverse 
+						</td>
+						<td>主轴为水平方向，起点在右端<br>
+						【reverse:颠倒的】</td>
+						<td><img src="layout-images/flex-container-attribute-1-2.PNG"></td>
+					</tr>
+					<tr>
+						<td>column</td>
+						<td>主轴为垂直方向，起点在上沿</td>
+						<td><img src="layout-images/flex-container-attribute-1-3.PNG"></td>
+					</tr>
+					<tr>
+						<td>column-reverse</td>
+						<td>主轴为垂直方向，起点在下沿</td>
+						<td><img src="layout-images/flex-container-attribute-1-4.PNG"></td>
+					</tr>
+					<tr>
+						<th rowspan="3">
+							flex-warp <br>
+							默认情况下，项目都排在一条线(轴线)上，
+							flex-wrap属性定义：如果一条轴线放不下，如何换行。<br>
+							【wrap:覆盖，包，裹，隐藏】
+						</th>
+						<td>nowrap(默认)</td>
+						<td>不换行</td>
+						<td>
+							示例：1~12 <br>
+							1,2,3,4,5,6,7,8,9,10,11,12 <br>
+							(宽度问题可能显示不全，此时会产生滑动条)
+						</td>
+					</tr>
+					<tr>
+						<td>wrap</td>
+						<td>换行，第一行在上方</td>
+						<td>
+							1,2,3,4,5,6,7,8 <br>
+							9,10,11,12
+						</td>
+					</tr>
+					<tr>
+						<td>wrap-reverse</td>
+						<td>换行，第一行在下方</td>
+						<td>
+							9,10,11,12 <br>
+							1,2,3,4,5,6,7,8
+						</td>
+					</tr>
+					<tr>
+						<th>flex-flow <br>
+						【flow:流】</th>
+						<td colspan="3">
+							flex-flow属性是flex-direction属性和flex-wrap属性的简写形式 <br>
+							默认值为 row nowrap
+						</td>
+					</tr>
+					<tr>
+						<th rowspan="5">
+							justify-content <br>
+							定义项目在主轴上的对齐方式 <br>
+							【justify:整理版面 content:内容】
+						</th>
+						<td>flex-start(默认)</td>
+						<td>左对齐</td>
+						<td>假设主轴从左到右<br>
+							<img src="layout-images/flex-container-attribute-2-1.PNG"></td>
+					</tr>
+					<tr>
+						<td>flex-end</td>
+						<td>右对齐</td>
+						<td><img src="layout-images/flex-container-attribute-2-2.PNG"></td>
+					</tr>
+					<tr>
+						<td>cneter</td>
+						<td>居中</td>
+						<td><img src="layout-images/flex-container-attribute-2-3.PNG"></td>
+					</tr>
+					<tr>
+						<td>space-between</td>
+						<td>两端对齐，项目之间的间隔都相等</td>
+						<td><img src="layout-images/flex-container-attribute-2-4.PNG"></td>
+					</tr>
+					<tr>
+						<td>space-around</td>
+						<td>每个项目两侧的间隔相等 <br>
+						<br>
+						所以，项目之间的间隔比项目与边框的间隔大一倍</td>
+						<td><img src="layout-images/flex-container-attribute-2-5.PNG"></td>
+					</tr>
+					<tr>
+						<th rowspan="5">
+							align-items <br>
+							定义项目在交叉轴上的对齐方式 <br>
+							【align:排列】
+						</th>
+						<td>stretch(默认) <br>
+						【stretch:伸展，张开】</td>
+						<td>若项目未设置高度或设为auto， <br>
+						将沾满整个容器的高度</td>
+						<td>假设交叉轴从上到下<br>
+						<img src="layout-images/flex-container-attribute-4-1.PNG">
+						</td>
+					</tr>
+					<tr>
+						<td>flex-start</td>
+						<td>交叉轴的起点对齐</td>
+						<td><img src="layout-images/flex-container-attribute-4-2.PNG"></td>
+					</tr>
+					<tr>
+						<td>flex-end</td>
+						<td>交叉轴的终点对齐</td>
+						<td><img src="layout-images/flex-container-attribute-4-3.PNG"></td>
+					</tr>
+					<tr>
+						<td>center(默认
+						
+						)</td>
+						<td>交叉轴的中点对齐</td>
+						<td><img src="layout-images/flex-container-attribute-4-4.PNG"></td>
+					</tr>
+					<tr>
+						<td>baseline</td>
+						<td>项目的第一行文字的基线对齐</td>
+						<td><img src="layout-images/flex-container-attribute-4-5.PNG"></td>
+					</tr>
+					<tr>
+						<th rowspan="6">
+							align-content <br>
+							定义了多根轴线(多行)的对齐方式 <br>
+							如果项目只有一根轴线，则该属性不起作用
+						</th>
+						<td>stretch(默认)</td>
+						<td>轴线占满整个交叉轴</td>
+						<td>假设交叉轴从上到下<br>
+						<img src="layout-images/flex-container-attribute-3-4.PNG"></td>
+					</tr>
+					<tr>
+						<td>flex-start</td>
+						<td>与交叉轴的起点对齐</td>
+						<td><img src="layout-images/flex-container-attribute-3-1.PNG"></td>
+					</tr>
+					<tr>
+						<td>flex-end</td>
+						<td>与交叉轴的终点对齐</td>
+						<td><img src="layout-images/flex-container-attribute-3-2.PNG"></td>
+					</tr>
+					<tr>
+						<td>center</td>
+						<td>与交叉轴的中点对齐</td>
+						<td><img src="layout-images/flex-container-attribute-3-3.PNG"></td>
+					</tr>
+					<tr>
+						<td>space-between</td>
+						<td>与交叉轴两端对齐，轴线之间的间隔平均分布</td>
+						<td><img src="layout-images/flex-container-attribute-3-5.PNG"></td>
+					</tr>
+					<tr>
+						<td>space-around</td>
+						<td>每根轴线两侧的间隔都相等 <br>
+						所以，轴线之间的间隔比轴线与边框的间隔大一倍</td>
+						<td><img src="layout-images/flex-container-attribute-3-6.PNG"></td>
+					</tr>
+				</table>
+				<br>
+				<br>
+				<table  id="flex-item-attribute">
+					<caption>项目属性</caption>
+					<tr>
+						<th>order <br>
+						此属性定义项目的排列顺序 
+						</th>
+						<td>数值 (默认0)</td>
+						<td>数值越小，排列越靠前</td>
+						<td><img src="layout-images/flex-item-attribute-1.PNG"></td>
+					</tr>
+					<tr>
+						<th>flex-grow <br>
+						此属性定义项目的放大比例
+						</th>
+						<td>数值 (默认0)</td>
+						<td>为0时，即使存在剩余空间，也不放大<br>
+						若所有项目的flex-grow都为1，则等分剩余空间(若有) <br>
+						若其中一个的flex-grow为2，则其占据的剩余空间将比其他项目多一倍
+						</td>
+						<td><img src="layout-images/flex-item-attribute-2.PNG"></td>
+					</tr>
+					<tr>
+						<th>flex-shrink <br>
+						此属性定义项目的缩小比例 <br>
+						【shrink:缩水】
+						</th>
+						<td>数值 (默认1)</td>
+						<td>为1时，如果空间不足，该项目缩小<br>
+						负值对该属性无效<br>
+						若所有项目的flex-shrink为1，则空间不足时将等比例缩小<br>
+						若有一为0，则其不缩小[示例中项目2此属性为0]
+						</td>
+						<td><img src="layout-images/flex-item-attribute-3.PNG"></td>
+					</tr>
+					<tr>
+						<th>flex-basis <br>
+						此属性定义了在分配多余空间之前，项目占据的主轴空间(main size)<br>	
+						浏览器根据这个属性，计算主轴是否有多余空间<br>	
+						【basis:基础】
+						</th>
+						<td>length:[如350px] (默认auto)</td>
+						<td>auto:项目的本来大小 <br>
+						可设置成和width，height属性一样的值</td>
+						<td>无示例</td>
+					</tr>
+					<tr>
+						<th>flex 
+						</th>
+						<td colspan="3">
+							是flex-grow(必选)，flex-shrink,flex-basis的简写(默认:0 1 auto) <br>
+							有两个快捷值:auto(1 1 auto),none(0 0 auto) <br>
+							建议优先使用此属性，因为浏览器会推算相关值
+						</td>
+					</tr>
+					<tr>
+						<th>align-self <br>
+						此属性允许单个项目有与其他项目不一样的对齐方式，可覆盖 <br>	
+						【self:自身】
+						</th>
+						<td>同align-items属性一致 (默认auto)</td>
+						<td>auto表示继承父元素的align-items属性，若无父元素，则等同stretch</td>
+						<td><img src="layout-images/flex-item-attribute-4.PNG"></td>
+					</tr>
+				</table>
+			</div>
+			
+			<h2 class="h2" id="flex-layout">Flex布局</h2>
+			<div class="flex">
+				<div id="flex-dice">
+					<h3 class="title">骰子布局</h3>
+					<h3 class="dice-title">单项目</h3>
+					<div class="dice-1">
+						<sapn>水平左对齐</sapn>
+						<div class="dice">
+							<div class="dice-box" id="dice-box-10">
+								<sapn class="dice-item"></sapn>
+							</div>
+						</div>
+						<div class="dice-css">
+							<code>
+								box{ <br>
+									display: flex; <br>
+								}
+							</code>
+						</div>
+					</div>
+					<p class="dice-explain">默认主轴方向，且在左上角只有一个点的情况下,Flex布局默认就是首行左对齐。</p>
+					<div class="dice-1">
+						<sapn>水平居中</sapn>
+						<div class="dice">
+							<div class="dice-box" id="dice-box-11">
+								<sapn class="dice-item"></sapn>
+							</div>
+						</div>
+						<div class="dice-css">
+							<code>
+								box{ <br>
+									display: flex; <br>
+									justify-content: center; <br>
+								}
+							</code>
+						</div>
+					</div>
+					<p  class="dice-explain">默认主轴方向下，设置项目在主轴上的对齐方式(justify-content)为 center，可以实现水平上的居中对齐。</p>
+					<div class="dice-1">
+						<sapn>水平右对齐</sapn>
+						<div class="dice">
+							<div class="dice-box" id="dice-box-12">
+								<sapn class="dice-item"></sapn>
+							</div>
+						</div>
+						<div class="dice-css">
+							<code>
+								box{ <br>
+									display: flex; <br>
+									justify-content: flex-end; <br>
+								}
+							</code>
+						</div>
+					</div>
+					<p  class="dice-explain">默认主轴方向下，设置项目在主轴上的对齐方式(justify-content)为 flex-end，可以实现水平上的右对齐。</p>
+					<div class="dice-1">
+						<sapn>水平左对齐<br>垂直居中</sapn>
+						<div class="dice">
+							<div class="dice-box" id="dice-box-13">
+								<sapn class="dice-item"></sapn>
+							</div>
+						</div>
+						<div class="dice-css">
+							<code>
+								box{ <br>
+									display: flex; <br>
+									align-items: center; <br>
+								}
+							</code>
+						</div>
+					</div>
+					<p  class="dice-explain">(左对齐为例)默认主轴方向、交叉轴方向下，设置项目在交叉轴上的对齐方式(align-items)为 center，可以实现垂直上的居中。</p>
+					<div class="dice-1">
+						<sapn>水平左对齐<br>垂直底部对齐</sapn>
+						<div class="dice">
+							<div class="dice-box" id="dice-box-14">
+								<sapn class="dice-item"></sapn>
+							</div>
+						</div>
+						<div class="dice-css">
+							<code>
+								box{ <br>
+									display: flex; <br>
+									align-items: flex-end; <br>
+								}
+							</code>
+						</div>
+					</div>
+					<p  class="dice-explain">(左对齐为例)默认主轴方向、交叉轴方向下，设置项目在交叉轴上的对齐方式(align-items)为 flex-end，可以实现垂直上的底部对齐。</p>
+					<div class="dice-1">
+						<sapn>水平垂直居中</sapn>
+						<div class="dice">
+							<div class="dice-box" id="dice-box-15">
+								<sapn class="dice-item"></sapn>
+							</div>
+						</div>
+						<div class="dice-css">
+							<code>
+								box{ <br>
+									display: flex; <br>
+									justify-content: center; <br>
+									align-items: center; <br>
+								}
+							</code>
+						</div>
+					</div>
+					<p  class="dice-explain">默认主轴方向、交叉轴方向下，设置项目在主轴上的对齐方式(justify-content)为 center，在交叉轴上的对齐方式(align-items)为 center，可以实现水平垂直居中。</p>
+					
+					<h3 class="dice-title">双项目</h3>
+					<div class="dice-2">
+						<div class="dice">
+							<div class="dice-box" id="dice-box-20">
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+							</div>
+						</div>
+						<div class="dice-css">
+							<code>
+								box{ <br>
+									display: flex; <br>
+									justify-content: space-between; <br>
+								}
+							</code>
+						</div>
+					</div>
+					<p class="dice-explain">(主轴方向默认)设置项目在主轴上的对齐方式(box属性:justify-content)为space-between，使之水平两端对齐，项目之间间隔相等(与边框无间隔)</p>
+					<div class="dice-2">
+						<div class="dice">
+							<div class="dice-box" id="dice-box-21">
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+							</div>
+						</div>
+						<div class="dice-css">
+							<code>
+								box{ <br>
+									display: flex; <br>
+									flex-direction: column; <br>
+									justify-content: space-between; <br>
+								}
+							</code>
+						</div>
+					</div>
+					<p class="dice-explain">设置主轴方向(flex-direction)为 column(垂直上至下),再设置项目在主轴上的对齐方式(box属性:justify-content)为space-between，使之垂直两端对齐，项目之间间隔相等</p>
+					<div class="dice-2">
+						<div class="dice">
+							<div class="dice-box" id="dice-box-22">
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+							</div>
+						</div>
+						<div class="dice-css">
+							<code>
+								box{ <br>
+									display: flex; <br>
+									flex-direction: column; <br>
+									justify-content: space-between; <br>
+									align-items: center; <br>
+								}
+							</code>
+						</div>
+					</div>
+					<p class="dice-explain">设置主轴方向(flex-direction)为 column(垂直上至下)后，交叉轴变为水平，故在上一例中添加交叉轴的对齐方式(align-items)为 center,使之居中，垂直方向两端对齐。</p>
+					<div class="dice-2">
+						<div class="dice">
+							<div class="dice-box" id="dice-box-23">
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item" id="dice-item-231"></sapn>
+							</div>
+						</div>
+						<div class="dice-css">
+							<code>
+								box{ <br>
+									display: flex; <br>
+								} <br>
+								item2{ <br>
+									align-self: center; <br>
+								}
+							</code>
+						</div>
+					</div>
+					<p class="dice-explain">dispaly:flex使第一个排在左上角，之后单独对item2的align-self(该属性允许单个项目有和其他项目不一样的对齐方式，覆盖父元素的align-items)设置为center，即item2的交叉轴对齐方式为center，造成此种效果。</p>
+					<div class="dice-2">
+						<div class="dice">
+							<div class="dice-box" id="dice-box-24">
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item" id="dice-item-241"></sapn>
+							</div>
+						</div>
+						<div class="dice-css">
+							<code>
+								box{ <br>
+									display: flex; <br>
+									justify-content: space-between; <br>
+								} <br>
+								item2{ <br>
+									align-self: flex-end; <br>
+								}
+							</code>
+						</div>
+					</div>
+					<p class="dice-explain">首先设置水平两端对齐(justify-content: space-between),再设置item2单独交叉轴对齐方式(align-self)为 flex-end，造成此种效果。</p>
+					
+					<h3 class="dice-title">三个以上项目</h3>
+					<div class="dice-3">
+						<div class="dice">
+							<div class="dice-box" id="dice-box-30">
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item" id="dice-item-301"></sapn>
+								<sapn class="dice-item" id="dice-item-302"></sapn>
+							</div>
+						</div>
+						<div class="dice-css">
+							<code>
+								box{ <br>
+									display: flex; <br>
+									flex-direction: column; <br>
+								} <br>
+								item2{ <br>
+									align-self: center; <br>
+								} <br>
+								item3{ <br>
+									align-self: flex-end; <br>
+								}
+							</code>
+						</div>
+					</div>
+					<p class="dice-explain">主要是更改主轴方向(flex-direction:column)以便使用align-self(交叉轴个人对齐方式)</p>
+					<div class="dice-3">
+						<div class="dice">
+							<div class="dice-box" id="dice-box-40">
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+							</div>
+						</div>
+						<div class="dice-css">
+							<code>
+								box{ <br>
+									display: flex; <br>
+									flex-wrap: wrap; <br>
+									justify-content: flex-end; <br>
+									align-content: space-between; <br>
+								}
+							</code>
+						</div>
+					</div>
+					<p class="dice-explain">一行可以放三个项目，本次有四个，所以设置换行方式(flex-wrap)为wrap(换行)(默认不换行(nowrap)),
+					设置主轴的对齐方式(justify-content)为flex-end,则以尾部起排列，之后设置交叉轴方向，有多根轴线(多行)时如何排列(align-content)为space-between,两端对齐。</p>
+					<div class="dice-3">
+						<div class="dice-html">
+							<code>
+								div.box <br>
+								&nbsp;div.column <br>
+								&nbsp;&nbsp;item1,item2 <br>
+								&nbsp;div.column <br>
+								&nbsp;&nbsp;item1,item2 <br>
+							</code>
+						</div>
+						<div class="dice">
+							<div class="dice-box" id="dice-box-41">
+								<div id="dice-column-410">
+									<sapn class="dice-item"></sapn>
+									<sapn class="dice-item"></sapn>
+								</div>
+								<div id="dice-column-411">
+									<sapn class="dice-item"></sapn>
+									<sapn class="dice-item"></sapn>
+								</div>
+							</div>
+						</div>
+						<div class="dice-css">
+							<code>
+								box{ <br>
+									display: flex; <br>
+									flex-wrap: wrap; <br>
+									align-content: space-between; <br>
+								} <br>
+								column{
+									flex-basis: 100%; <br>
+									display: flex; <br>
+									justify-content: space-between; <br>
+								}
+							</code>
+						</div>
+					</div>
+					<p class="dice-explain">
+						&nbsp;&nbsp;&nbsp;&nbsp;在本例的html中，box的项目是两个column，由于是块元素，所余会换行，两个column为两行，，设置换行方式(flex-wrap)为wrap(换行)，
+						设置多根轴线(多行)时交叉轴的对齐方式(align-content)为space-between(两端对齐)，则两个column两端对齐，中间隔一行。 <br>
+						&nbsp;&nbsp;&nbsp;&nbsp;将项目column占据的主轴空间(flex-basis)设置为100%(默认为auto，项目的本来大小)，即column占满全行。<br>
+						再将column设置为flex，设置其主轴对齐方式(justify-content)为space-between，两端对齐。 <br>
+						&nbsp;&nbsp;&nbsp;&nbsp;最终达成本例效果。
+					</p>
+					<div class="dice-3">
+						<div class="dice">
+							<div class="dice-box" id="dice-box-60">
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+							</div>
+						</div>
+						<div class="dice-css">
+							<code>
+								box{ <br>
+									display: flex; <br>
+									flex-wrap: wrap; <br>
+									align-content: space-between; <br>
+								}
+							</code>
+						</div>
+					</div>
+					<p class="dice-explain">设置换行且多行对齐方式，得到本例。</p>
+					<div class="dice-3">
+						<div class="dice">
+							<div class="dice-box" id="dice-box-61">
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+							</div>
+						</div>
+						<div class="dice-css">
+							<code>
+								box{ <br>
+									display: flex; <br>
+									flex-direction: column; <br>
+									flex-wrap: wrap; <br>
+									align-content: space-between; <br>
+								}
+							</code>
+						</div>
+					</div>
+					<p class="dice-explain">只需更改上例的主轴方向为垂直上至下，得到本例。</p>
+					<div class="dice-3">
+						<div class="dice-html">
+							<code>
+								div.box <br>
+								&nbsp;div.row1 <br>
+								&nbsp;&nbsp;item1,item2,item3 <br>
+								&nbsp;div.row2 <br>
+								&nbsp;&nbsp;item1 <br>
+								&nbsp;div.row3 <br>
+								&nbsp;&nbsp;item1,item2
+							</code>
+						</div>
+						<div class="dice">
+							<div class="dice-box" id="dice-box-62">
+								<div id="dice-row-620">
+									<sapn class="dice-item"></sapn>
+									<sapn class="dice-item"></sapn>
+									<sapn class="dice-item"></sapn>
+								</div>
+								<div id="dice-row-621">
+									<sapn class="dice-item"></sapn>
+								</div>
+								<div id="dice-row-622">
+									<sapn class="dice-item"></sapn>
+									<sapn class="dice-item"></sapn>
+								</div>
+							</div>
+						</div>
+						<div class="dice-css">
+							<code>
+								box{ <br>
+									display: flex; <br>
+									flex-wrap: wrap;<br>
+								}<br>
+								row{<br>
+									flex-basis: 100%;<br>
+									display: flex;<br>
+								}<br>
+								row2{<br>
+									justify-content: center;<br>
+								}<br>
+								row3{<br>
+									justify-content: space-between;<br>
+								}
+							</code>
+						</div>
+					</div>
+					<p class="dice-explain">
+						设置box的换行方式(flex-wrap)为wrap(换行)。<br>
+						将box的项目设置为三部分row，将row所占主轴空间(flex-basis)设置为100%。<br>
+						再设置row2的主轴对齐方式(justify-content)为center，row3为space-between。<br>
+						形成本例。
+					</p>
+					<div class="dice-3">
+						<div class="dice">
+							<div class="dice-box" id="dice-box-90">
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+								<sapn class="dice-item"></sapn>
+							</div>
+						</div>
+						<div class="dice-css">
+							<code>
+								box{ <br>
+									display: flex; <br>
+									flex-wrap: wrap; <br>
+								}
+							</code>
+						</div>
+					</div>
+					<p class="dice-explain">设置换行，即可达成本例。</p>
+				</div>
+				<div id="flex-basic-grid">
+					<h3 class="title">网格布局</h3>
+					<h3 class="basic-grid-title">基本网格布局</h3>
+					<p class="basic-grid-explain">
+						最简单的网格布局，就是平均分布。<br>
+					在容器里面平均分配空间，项目自动缩放。<br>
+					即每行的项目数目不定，但同行项目所占行空间是相等的。
+					</p>
+					<div class="basic-grid-example" id="basic-grid-example-1">
+						<div class="basic-grid-example-cell basic-grid-example-cell-1">
+							<span class="basic-grid-example-cell-item basic-grid-example-cell-item-1">1/2</span>
+							<span class="basic-grid-example-cell-item basic-grid-example-cell-item-1">1/2</span>
+						</div>
+						<div class="basic-grid-example-cell basic-grid-example-cell-1">
+							<span class="basic-grid-example-cell-item  basic-grid-example-cell-item-1">1/3</span>
+							<span class="basic-grid-example-cell-item  basic-grid-example-cell-item-1">1/3</span>
+							<span class="basic-grid-example-cell-item  basic-grid-example-cell-item-1">1/3</span>
+						</div>
+						<div class="basic-grid-example-cell basic-grid-example-cell-1">
+							<span class="basic-grid-example-cell-item  basic-grid-example-cell-item-1">1/4</span>
+							<span class="basic-grid-example-cell-item  basic-grid-example-cell-item-1">1/4</span>
+							<span class="basic-grid-example-cell-item  basic-grid-example-cell-item-1">1/4</span>
+							<span class="basic-grid-example-cell-item  basic-grid-example-cell-item-1">1/4</span>
+						</div>
+						<div class="basic-grid-example-cell basic-grid-example-cell-1">
+							<span class="basic-grid-example-cell-item  basic-grid-example-cell-item-1">文章</span>
+							<span class="basic-grid-example-cell-item  basic-grid-example-cell-item-1">
+								文章(本块高度由文本撑开) <br>
+								She had been shopping with her Mom in Wal-Mart. 
+								She must have been 6 years old,
+								 this beautiful brown haired,
+								  freckle-faced image of innocence. 
+								  It was pouring outside. 
+								  The kind of rain that gushes over the top of rain gutters,
+								   so much in a hurry to hit the Earth,
+								   it has no time to flow down the spout.
+							</span>
+						</div>
+					</div>
+					<div class="basic-grid-code">
+						<code class="basic-grid-html">
+							<h3>HTML</h3>
+							div.box <br>
+							&nbsp;div.cell <br>
+							&nbsp;&nbsp;item1,item2 <br>
+							&nbsp;div.cell <br>
+							&nbsp;&nbsp;item1,item2,item3 <br>
+							&nbsp;div.cell <br>
+							&nbsp;&nbsp;item1,item2,item3,item4 <br>
+							&nbsp;div.cell <br>
+							&nbsp;&nbsp;item1,item2(article) <br>
+						</code>
+						<code class="basic-grid-css">
+							<h3>CSS</h3>
+							box{ <br>
+								display: flex; <br>
+								flex-wrap: wrap; <br>
+							}<br>
+							cell{<br>
+								flex-basis: 100%;<br>
+								display: flex;<br>
+							}<br>
+							item{<br>
+								flex: 1;<br>
+								margin: 3px;<br>
+								border: solid 1px lightgrey; <br>
+							}
+						</code>
+					</div>
+					<p class="basic-grid-explain">
+						CSS分析 <br>
+						首先，设置整个例子盒子为flex，设置可以换行(flex-wrap:wrap)
+						然后，设置每行(div.cell)所占据的主轴空间为100%(flex-basis:100%)，使每个div.cell占据一行。 <br>
+						将div.cell设置为flex，设置其中的item具有外边距3px，为了防止边框坍塌设置border。(这样设置是为了让项目之间存在间隔，看起来好看)<br>
+						最后，设置item的flex为1，即当存在剩余空间时，item将扩大，等分占据空间。<br>
+						<br>
+						【flex:1】flex是flex-grow(剩余空间：扩大)，flex-shrink(剩余空间：缩小)，flex-basis(本身大小)三者的合属性，但只有flex-grow为必填，所有item设为1时，将扩大且等分容器剩余空间。<br>
+						flex的值:auto(1 1 auto),none(0 0 auto)
+					</p>
+					<h3 class="basic-grid-title">百分比网格布局</h3>
+					<p class="basic-grid-explain">
+						某个网格的宽度为固定的百分比，其余网格平均分配剩余空间。
+					</p>
+					<div class="basic-grid-example" id="basic-grid-example-2">
+						<div class="basic-grid-example-cell basic-grid-example-cell-2">
+							<span class="basic-grid-example-cell-item basic-grid-example-cell-item-2-2">1/2</span>
+							<span class="basic-grid-example-cell-item basic-grid-example-cell-item-2-auto">auto</span>
+							<span class="basic-grid-example-cell-item basic-grid-example-cell-item-2-auto">auto</span>
+							
+						</div>
+						<div class="basic-grid-example-cell basic-grid-example-cell-2">
+							<span class="basic-grid-example-cell-item basic-grid-example-cell-item-2-auto">auto</span>
+							<span class="basic-grid-example-cell-item  basic-grid-example-cell-item-2-3">1/3</span>
+							
+						</div>
+						<div class="basic-grid-example-cell basic-grid-example-cell-2">
+							<span class="basic-grid-example-cell-item  basic-grid-example-cell-item-2-4">1/4</span>
+							<span class="basic-grid-example-cell-item basic-grid-example-cell-item-2-auto">auto</span>
+							<span class="basic-grid-example-cell-item  basic-grid-example-cell-item-2-3">1/3</span>
+						</div>
+					</div>
+					<div class="basic-grid-code">
+						<code class="basic-grid-html">
+							<h3>HTML</h3>
+							div.box <br>
+							&nbsp;div.cell <br>
+							&nbsp;&nbsp;1/2,auto,auto <br>
+							&nbsp;div.cell <br>
+							&nbsp;&nbsp;auto,1/3 <br>
+							&nbsp;div.cell <br>
+							&nbsp;&nbsp;1/4,auto,1/3 <br>
+						</code>
+						<code class="basic-grid-css">
+							<h3>CSS</h3>
+							box{ <br>
+								display: flex; <br>
+								flex-wrap: wrap; <br>
+							}<br>
+							cell{<br>
+								flex-basis: 100%;<br>
+								display: flex;<br>
+							}<br>
+							auto{<br>
+								flex: 1;<br>
+							}<br>
+							1/2{<br>
+								flex: 0 0 50%;<br>
+							}<br>
+							1/3{<br>
+								flex: 0 0 33.33333%;<br>
+							}<br>
+							1/4{<br>
+								flex: 0 0 25%;<br>
+							}
+						</code>
+					</div>
+					<p class="basic-grid-explain">
+						CSS分析 <br>
+						首先，设置整个例子盒子为flex，设置可以换行(flex-wrap:wrap)
+						然后，设置每行(div.cell)所占据的主轴空间为100%(flex-basis:100%)，使每个div.cell占据一行。 <br>
+						将div.cell设置为flex，设置其中的item具有外边距3px，为了防止边框坍塌设置border。(这样设置是为了让项目之间存在间隔，看起来好看)(这里的item用了上例的基本item css)<br>
+						<br>
+						设置auto的flex为1，即当存在剩余空间时，item-auto将扩大，等分占据剩余空间。<br>
+						设置1/2的flex为0 0 50%，即当存在剩余空间时，item-1/2不变，照样占据主轴空间的1/2。<br>
+						设置1/3的flex为0 0 33.33333%，即当存在剩余空间时，item-1/3不变，照样占据主轴空间的1/3。<br>
+						设置1/4的flex为0 0 25%，即当存在剩余空间时，item-1/4不变，照样占据主轴空间的1/4。<br>
+						<br>
+						【flex:1】flex是flex-grow(剩余空间：扩大)，flex-shrink(剩余空间：缩小)，flex-basis(本身大小)三者的合属性，但只有flex-grow为必填，所有item设为1时，将扩大且等分容器剩余空间。<br>
+						flex的值:auto(1 1 auto),none(0 0 auto)
+						
+					</p>
+				</div>
+				<div id="flex-holy-grail">
+					<h3 class="title">圣杯布局</h3>
+					<p class="explain">三栏布局是最常见的一种网站布局，又分为圣杯布局(Holy Grail Layout)和双飞翼布局。。<br>
+					页面从上到下，分为头部(header)、躯干(body)、尾部(footer)。<br>
+					其中躯干水平分为三栏(如果页面太小则垂直展现),从左到右为:导航、主栏、副栏。<br>
+					圣杯布局就是两侧宽度固定，主栏宽度auto。<br>
+					双飞翼布局就是主栏宽度固定，两侧宽度相等且变换。</p>
+					<div class="holy-grail-example">
+						<header id="holy-grail-example-header">header</header>
+						<div id="holy-grail-example-body">
+							<main id="body-main">main</main>
+							<nav id="body-nav">nav</nav>
+							<aside id="body-aside">aside</aside>
+						</div>
+						<footer id="holy-grail-example-footer">footer</footer>
+					</div>
+					<div class="holy-grail-code">
+						<code class="holy-grail-html">
+							<h3>HTML</h3>
+							box <br>
+							&nbsp;header <br>
+							&nbsp;div.body <br>
+							&nbsp;&nbsp;main <br>
+							&nbsp;&nbsp;nav <br>
+							&nbsp;&nbsp;aside <br>
+							&nbsp;footer <br>
+						</code>
+						<code class="holy-grail-css">
+							<h3>CSS</h3>
+							box{ <br>
+								display: flex; <br>
+								flex-direction: column; <br>
+								min-height: 30vh;<br>
+							}<br>
+							header,footer{<br>
+								flex: 1;<br>
+							}<br>
+							body{<br>
+								flex: 4;<br>
+								display: flex;<br>
+							}<br>
+							main{<br>
+								flex: 1;<br>
+							}<br>
+							nav,aside{<br>
+								flex: 0 0 12em;<br>
+							}<br>
+							nav{ <br>
+								order: -1;<br>
+							} <br>
+							<br>	
+							<br>
+							@media (max-width:400px) { <br>
+								&nbsp;body{<br>
+								&nbsp;flex-direction: column;<br>
+									&nbsp;flex: 4;<br>
+								&nbsp;}<br>
+								&nbsp;nav,aside{<br>
+									&nbsp;flex: auto;<br>
+								&nbsp;}<br>
+								&nbsp;main{<br>
+									&nbsp;flex: 3;<br>
+								&nbsp;}<br>
+							}
+						</code>
+					</div>
+					<p class="explain">
+						【CSS分析(正常屏幕)】 <br>
+						在正式的圣杯布局中，box的min-height应为100vh(占满全屏)，本次为了演示只作30vh <br>
+						将box设为flex，改变主轴方向(flex-direction: column;)，使header、body、footer三块垂直顺序排下，之后设置header、footer的flex为1，bodywei4，以自动分配高度，使三者按比例占据页面 <br>
+						之后设置body为flex，使其中main、nav、aside成为项目。此时设置main自动扩张(Flex:1),nav和aside不扩张，但有固定的占据主轴空间(flex: 0 0 12em[em:一个相对的度量单位，是一个字符的高度font-size]) <br>
+						设置nav的order为-1，使order成为主轴上第一个项目(放在最左边)。<br>	
+						【CSS分析(小于等于400px屏幕)】 <br>
+						此时使用@media (max-width:400px){...css...}来检测屏幕宽度来判断是否进行其中css的执行。<br>
+						如果屏幕小，则body内容垂直顺序排列(项目所占空间为其本来大小[flex:auto[1 1 auto]])。
+					</p>
+				</div>
+				<div id="flex-input">
+					<h3 class="title">输入框布局</h3>
+					<p class="dice-explain">我们需要在输入框前方添加提示，后方添加按钮</p>
+					<div id="flex-input-example">
+						<span id="flex-input-example-explain">提示信息</span>
+						<input type="text" id="flex-input-example-input">
+						<button type="button" id="flex-input-example-button">提交</button>
+					</div>
+					<div id="flex-input-code">
+						<code class="flex-input-html">
+							<h3>HTML</h3>
+							box <br>
+							&nbsp;span.text <br>
+							&nbsp;input <br>
+							&nbsp;button
+						</code>
+						<code class="flex-input-css">
+							<h3>CSS</h3>
+							box{ <br>
+								display: flex; <br>
+							} <br>
+							input{ <br>
+								flex: 1; <br>
+							}
+						</code>
+					</div>
+					<p class="dice-explain">
+						CSS分析 <br>
+						主要作用是让按钮、信息、输入框紧密结合。如果不使用flex的话可能会产生空隙、移位、以后上下微妙的不匹配。
+					</p>
+				</div>
+				<div id="flex-hang">
+					<h3 class="title">悬挂式布局</h3>
+					<p class="dice-explain">有时主栏的左侧or右侧需要添加一个图片栏</p>
+					<div id="flex-hang-example">
+						<img src="layout-images/flex-hang.PNG" alt="示例图片" id="flex-hang-example-img">
+						<div id="flex-hang-example-body">
+							<h4>Stanard Media</h4>
+							<p>
+								She had been shopping with her Mom in Wal-Mart.
+								She must have been 6 years old,
+								 this beautiful brown haired,
+								  freckle-faced image of innocence. 
+								  It was pouring outside. 
+								  The kind of rain that gushes over the top of rain gutters,
+								   so much in a hurry to hit the Earth,
+								   it has no time to flow down the spout.
+							</p>
+						</div>
+					</div>
+					<div id="flex-input-code">
+						<code class="flex-input-html">
+							<h3>HTML</h3>
+							box <br>	
+							&nbsp;img <br>
+							&nbsp;body <br>
+							&nbsp;&nbsp;h4 <br>
+							&nbsp;&nbsp;p 
+						</code>
+						<code class="flex-input-css">
+							<h3>CSS</h3>
+							box{ <br>
+								display: flex;<br>
+								align-items: flex-start;<br>
+								padding: 10px; <br>
+							}<br>
+							img{<br>
+								margin-right: 1em;<br>
+								margin-top: 25px; <br>
+							}<br>
+							body{<br>
+								flex:1;<br>
+							}
+						</code>
+					</div>
+					<p class="dice-explain">
+					分析 <br>
+					这是一种在社交网络上常见的布局，需要显示用户头像和用户内容(将头像以悬挂式放置在主栏(内容)的侧边) <br>
+					由于本例采用了h4所以给img添加了margin-top以便对齐。box的padding也是同理。 <br>
+					box采用flex布局，交叉轴(垂直)方向上的对齐方式为flex-start，即img和body都顶端对齐。<br>
+					img有margin-right以便与主栏分开，img有自己的宽度，而主栏则占据剩余空间(flex:1)
+					</p>
+				</div>
+				<div id="flex-bottom">
+					<h3 class="title">固定底栏布局</h3>
+					<p class="dice-explain">有时，页面内容太少以至于无法占满一屏的高度时，底栏就会被抬高到页面的中间。而固定底栏布局则是让底栏总是出现在页面的底部。</p>
+					<div id="flex-bottom-example">
+						<header id="flex-bottom-example-header"></header>
+						<main id="flex-bottom-example-main">123123</main>
+						<footer id="flex-bottom-example-footer">固定底栏</footer>
+					</div>
+					<div id="flex-bottom-code">
+						<code class="flex-bottom-html">
+							<h3>HTML</h3>
+							box <br>
+							&nbsp;header <br>
+							&nbsp;main <br>
+							&nbsp;footer <br>
+						</code>
+						<code class="flex-bottom-css">
+							<h3>CSS</h3>
+							box{ <br>
+								display: flex;<br>
+								min-height: 30vh;<br>
+								flex-direction: column;<br>
+							}<br>
+							main{<br>
+								flex: 1;<br>
+							}
+						</code>
+					</div>
+					<p class="dice-explain">
+						CSS分析 <br>
+						改变主轴方向后，header、main、footer垂直排列。之后设定main的flex为1，则main会占据剩余空间，但header和footer的flex-grow默认为0，不占据剩余空间。而main将空间占完之后，footer就永远存在于底部，达成固定底栏效果。
+					</p>
+				</div>
+				<div id="flex-flow">
+					<h3 class="title">流式布局</h3>
+					<p class="dice-explain">每行的项目数固定，会自动分行</p>
+					<div id="flex-flow-example">
+						<div id="flex-flow-example-1">
+							<span class="flex-flow-example-item"></span>
+							<span class="flex-flow-example-item"></span>
+							<span class="flex-flow-example-item"></span>
+							<span class="flex-flow-example-item"></span>
+							<span class="flex-flow-example-item"></span>
+						</div>
+						<div id="flex-flow-example-2">
+							<span class="flex-flow-example-item"></span>
+							<span class="flex-flow-example-item"></span>
+							<span class="flex-flow-example-item"></span>
+							<span class="flex-flow-example-item"></span>
+							<span class="flex-flow-example-item"></span>
+							<span class="flex-flow-example-item"></span>
+							<span class="flex-flow-example-item"></span>
+							<span class="flex-flow-example-item"></span>
+							<span class="flex-flow-example-item"></span>
+							<span class="flex-flow-example-item"></span>
+						</div>
+					</div>
+					<div id="flex-flow-code">
+						<code class="flex-flow-html">
+							<h3>HTML</h3>
+							box1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;box2 <br>
+							&nbsp;item1-5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;item1-10
+						</code>
+						<code class="flex-flow-css">
+							<h3>CSS</h3>
+							box{<br>
+								display: flex;<br>
+								flex-flow: row wrap;<br>
+								align-content: flex-start;<br>
+							}<br>
+							item{ <br>	
+								border: solid 1px red;<br>
+								<br>
+								flex: 0 0 25%;<br>
+								height: 50px;<br>
+								<br>
+								box-sizing: border-box;<br>
+							}<br>
+						</code>
+					</div>
+					<p class="dice-explain">
+						CSS分析 <br>
+						box设定flex-flow(flex-direction + flex-wrap的缩写)为row wrap，即正常水平主轴方向以及可以换行，实现自动换行。<br>
+						设定多行时的交叉轴对齐方式(align-content)为 flex-start，即顶端对齐。<br>
+						之后设定item的flex为0 0 25%，即不扩大不缩小，每个占据主轴空间为1/4，但此时的box-size是不包括padding和border的，当item加上border时，就会超出范围，无法达成一行四个的目标。<br>
+						为了解决这个问题，设定box-size:border-box,即包含padding和border的盒子。此时加上边框和内容构成的一个总盒子占据的主轴空间是25%，达成目标。
+					</p>
+				</div>
+				
+				
+				
+			</div>
+		</div>
+		
+		<!-- js -->
+		<script type="text/javascript" src="jquery-3.4.1.js"></script>
+		<script type="text/javascript" src="study-layout.js"></script>
+	</body>
+</html>

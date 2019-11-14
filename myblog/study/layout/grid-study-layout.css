@@ -1,0 +1,211 @@
+.example-c{
+	width: 150px;
+	height: 150px;
+	background: white;/* 
+	border: solid; */
+}
+.t-1{
+	background: indianred;
+}
+.t-2{
+	background: orange;
+}
+.t-3{
+	background: seagreen;
+}
+.t-4{
+	background: lightblue;
+}
+.t-5{
+	background: blueviolet;
+}
+.t-6{
+	background: wheat;
+}
+.t-7{
+	background: gray;
+}
+.t-8{
+	background: lightgreen;
+}
+.t-9{
+	background: skyblue;
+}
+.t-10{
+	background: lightgreen;
+}
+.t-11{
+	background: wheat;
+}
+.t-12{
+	background: blueviolet;
+}
+/* c-2 */
+#e-c-2-1{
+	display: grid;
+	grid-template-columns: 50px 50px 50px;
+	grid-template-rows: 50px 50px 50px;
+}
+#e-c-2-2{
+	display: grid;
+	grid-template-columns: repeat(3,33.33%);
+	grid-template-rows: repeat(3,33.33%);
+}
+#e-c-2-3{
+	width: 200px;
+	height: 100px;
+	display: grid;
+	grid-template-columns: repeat(2,50px 10px 40px);
+	grid-template-rows: repeat(2,50%);
+}
+#e-c-2-4{
+	width: 200px;
+	height: 100px;
+	display: grid;
+	grid-template-columns: repeat(auto-fill,40px);
+}
+#e-c-2-5{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+#e-c-2-6{
+	display: grid;
+	grid-template-columns: 50px 1fr 2fr;
+}
+#e-c-2-7{
+	width: 200px;
+	display: grid;
+	grid-template-columns: 1fr 1fr minmax(10px,1fr);
+}
+#e-c-2-8{
+	width: 200px;
+	display: grid;
+	grid-template-columns: 50px auto 50px;
+}
+#e-c-2-9{
+	display: grid;
+	grid-template-columns: [c1] 20px [c2] 50px [c3] auto [c4];
+	grid-template-rows: [r1] 50px [r2] 50px [r3] auto [r4];
+}
+#e-c-2-10{
+	display: grid;
+	grid-template-columns: 70% 30% ;
+}
+#e-c-2-11{
+	width: 250px;
+	display: grid;
+	grid-template-columns: repeat(12,1fr)
+}
+#e-c-3-1{
+	width: 200px;
+	height: 200px;
+	display: grid;
+	gap: 10px 10px;
+	grid-template-columns: repeat(3,1fr);
+}
+#e-c-4-1{
+	height: 200px;
+	display: grid;
+	grid-template-columns: 50px 50px 50px;
+	grid-template-rows: repeat(auto,1fr);
+	grid-auto-flow: row;
+}
+.t-4-11{
+	grid-column-start: 1;
+	grid-column-end: 3;
+}
+#e-c-4-2{
+	height: 200px;
+	display: grid;
+	grid-template-columns: 50px 50px 50px;
+	grid-template-rows: repeat(auto,1fr);
+	grid-auto-flow: row dense;
+}
+.t-4-21{
+	grid-column-start: 1;
+	grid-column-end: 3;
+}
+.t-4-31{
+	grid-row-start: 1;
+	grid-row-end: 3;
+}
+#e-c-4-3{
+	width: 200px;
+	display: grid;
+	grid-template-columns: repeat(auto,1fr);
+	grid-template-rows: repeat(3,1fr);
+	grid-auto-flow: column;
+}
+#e-c-4-4{
+	width: 200px;
+	display: grid;
+	grid-template-columns: repeat(auto,1fr);
+	grid-template-rows: repeat(3,1fr);
+	grid-auto-flow: column dense;
+}
+#e-c-5-1{
+	display: grid;
+	grid-template-columns: repeat(3,1fr);
+	grid-template-rows: repeat(3,1fr);
+	grid-auto-rows: 20px;
+}
+#t-5-8{
+	grid-area: 4/2/5/3;
+}
+#t-5-9{
+	grid-area: 5/3/6/4;
+}
+/* 项目 */
+#e-t-1-1{
+	height: 200px;
+	display: grid;
+	grid-template-columns: repeat(3,1fr);
+	grid-template-rows: repeat(auto,1fr);
+}
+#e-t-1-11{
+	grid-column-start: 2;
+	grid-column-end: 4;
+}
+
+#e-t-1-2{
+	height: 200px;
+	display: grid;
+	grid-template-columns: repeat(3,1fr);
+	grid-template-rows: repeat(auto,1fr);
+}
+#e-t-1-21{
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 4;
+}
+#e-t-1-3{
+	height: 200px;
+	display: grid;
+	grid-template-columns: repeat(3,1fr);
+	grid-template-rows: repeat(auto,1fr);
+}
+#e-t-1-31{
+	grid-column-start: span 2;
+}
+#e-t-1-4{
+	height: 200px;
+	display: grid;
+	grid-template-columns: repeat(3,1fr);
+	grid-template-rows: repeat(auto,1fr);
+}
+#e-t-1-41{
+	grid-column: 1/span 2;
+	grid-row: 2/span 2;
+}
+#e-t-3-1{
+	display: grid;
+	grid-template-columns: repeat(3,50px);
+	grid-template-rows: repeat(3,50px);
+	grid-template-areas: "a b c"
+						"d e f"
+						". . .";
+}
+#e-t-3-11{
+	grid-area: e;
+}

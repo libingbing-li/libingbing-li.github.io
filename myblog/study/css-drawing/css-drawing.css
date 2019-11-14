@@ -1,0 +1,156 @@
+/* sticky demo */
+.sticky{
+	width: 200px;
+	height: 200px;
+	overflow: scroll;
+	
+	background: white;
+}
+.sticky *{
+	box-sizing: border-box;
+}
+.sticky dl{
+	margin: 0;
+	padding: 24px 0 0 0;
+}
+.sticky dt{
+	position: -webkit-sticky;
+	position: sticky;
+	top: -1px;
+	
+	margin: 0;
+	padding: 2px 0 0 12px;
+	border-top: 1px solid #717D85;
+	border-bottom: 1px solid #989EA4;
+	
+	background: #B8C1C8;
+	color: #FFF;
+}
+.sticky dd{
+	margin: 0;
+	padding: 0 0 0 12px;
+	white-space: nowrap;
+}
+.sticky dd+dd{
+	border-top: 1px solid #ccc;
+}
+
+/* transform-rotate */
+.card,
+.card *,
+.card *:after,
+.card *:before {
+	box-sizing: border-box;
+}
+.card{
+	margin: 10px;
+	padding: 15px;
+	width: 180px;
+	/* box-shadow: 0 3px 5px #ddd; */
+	/* 添加阴影 水平阴影位置 垂直阴影位置 阴影尺寸/模糊距离 颜色  */
+	
+	color: #555;
+	background: #fff;
+}
+.card .box{
+	width: 100px;
+	height: 100px;
+	margin: auto;
+	background: #ddd;
+	
+	cursor: pointer;
+	/* 指示光标为手型 */
+}
+.card .box .fill {
+	width: 100px;
+	height: 100px;
+	background: #03A9F4;
+	opacity: .5;
+	
+	-webkit-transition: 0.3s;
+	        transition: 0.3s;
+}
+.card p{
+	margin: 10px;
+	text-align: center;
+}
+
+/* rotate */
+.rotate:hover .fill {
+	-webkit-transform: rotate(45deg);
+	        transform: rotate(45deg);
+}
+.rotateX:hover .fill {
+	-webkit-transform: rotateX(45deg);
+	        transform: rotateX(45deg);
+}
+.rotateY:hover .fill {
+	-webkit-transform: rotateY(45deg);
+	        transform: rotateY(45deg);
+}
+.rotateZ:hover .fill {
+	-webkit-transform: rotateZ(45deg);
+	        transform: rotateZ(45deg);
+}
+.rotate3d:hover .fill {
+	-webkit-transform: rotate3d(.5,1,0,45deg);
+	        transform: rotate3d(.5,1,0,45deg);
+}
+/* scale */
+.scale:hover .fill{
+	-webkit-transform: scale(.5,2);
+	        transform: scale(.5,2);
+}
+.scaleX:hover .fill{
+	-webkit-transform: scaleX(2);
+	        transform: scaleX(2);
+}
+.scaleY:hover .fill{
+	-webkit-transform: scaleY(2);
+	        transform: scaleY(2);
+}
+.scaleZ:hover .fill{
+	-webkit-transform: scaleZ(2);
+	        transform: scaleZ(2);
+}
+/* skew */
+.skew:hover .fill{
+	-webkit-transform: skew(45deg,45deg);
+	        transform: skew(45deg,45deg);
+}
+.skewX:hover .fill{
+	-webkit-transform: skewX(45deg);
+	        transform: skewX(45deg);
+}
+.skewY:hover .fill{
+	-webkit-transform: skewY(45deg);
+	        transform: skewY(45deg);
+}
+/* translate */
+.translate:hover .fill{
+	-webkit-transform: translate(45px,1em);
+	        transform: translate(45px,1em);
+}
+.translateX:hover .fill{
+	-webkit-transform: translateX(45px);
+	        transform: translateX(45px);
+}
+.translateY:hover .fill{
+	-webkit-transform: translateY(45px);
+	        transform: translateY(45px);
+}
+/* matrix */
+.matrix:hover .fill {
+  -webkit-transform: matrix(2, 2, 0, 2, 2, 0);
+  transform: matrix(2, 2, 0, 2, 2, 0);
+}
+/* perspective */
+.perspective-100 .box{
+	-webkit-perspective: 100px;
+	perspective: 100px;
+}
+.perspective-200 .box{
+	-webkit-perspective: 200px;
+	perspective: 200px;
+}
+/* tansform-origin */

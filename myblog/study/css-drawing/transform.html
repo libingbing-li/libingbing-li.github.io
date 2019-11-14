@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>css绘制图形及其应用属性</title>
+		<meta name="viewport" content="
+		width=device-width,initial-scale=1.0
+		"/>
+		
+		<link rel="stylesheet" type="text/css" href="../study.css"/>
+		<link rel="stylesheet" type="text/css" href="css-drawing.css"/>
+	</head>
+	<body>
+		<div id="directory">
+			<div id="directory-show">
+				<button type="button" id="directory-b-show">目录</button>
+				<button type="button" id="directory-b-hide"></button>
+			</div>
+			
+			<ul id="directory-hide">
+				<li class="d1"><a href="#top" class="d1-show">Top</a></li>
+				<li class="d1">
+					<a href="#rotate"  class="d1-show">rotate-旋转</a>
+				</li>
+				<li class="d1">
+					<a href="#scale"  class="d1-show">scale-缩放</a>
+				</li>
+				<li class="d1">
+					<a href="#skew"  class="d1-show">skew-倾斜</a>
+				</li>
+				<li class="d1">
+					<a href="#translate"  class="d1-show">translate-移动</a>
+				</li>
+				<li class="d1">
+					<a href="#matrix"  class="d1-show">matrix-矩阵</a>
+				</li>
+				<li class="d1">
+					<a href="#perspective"  class="d1-show">perspective-透视</a>
+				</li>
+				<li class="d1">
+					<a href="#transform-origin"  class="d1-show">transform-origin</a>
+				</li>
+			</ul>
+		</div>
+		<header class="header">
+			<h1>CSS-Drawing</h1>
+			<br>
+			使用css绘制形状的好处：1.放大图像不失真 2.文件占用空间小 
+			3.减少http请求
+			<br>
+			<br>
+			主要运用属性：
+			<a href="index.html">position</a>、
+			<a href="index.html#border-radius">border-radius</a>、
+			<a href="transform.html">transform(转变)</a>。
+			<br>
+			<br>
+			<a href="drawing.html">可绘制图形</a><br><br>
+			<a href="../layout/index.html">返回->布局方式</a>
+		</header>
+		
+		<h1 class="title-1">transform知识点</h1>
+		<div class="introduce">
+			<br>
+			transform属性<br>
+			<br>
+			应用于元素的2D或3D转换。这个属性允许你将元素旋转，缩放，移动，倾斜等。<br>
+			transform属性的对应值主要分为： <br>
+			<ul>
+				<li>rotate-旋转</li>
+				<li>scale-缩放</li>
+				<li>skew-倾斜</li>
+				<li>translate-移动</li>
+				<li>matrix-矩阵</li>
+				<li>
+					div { <br>
+					    -webkit-transform:rotate(7deg); <br>
+						【Safari and Chrome】<br>
+						-ms-transform:rotate(7deg); <br>
+						【 IE 9 】<br>
+						transform:rotate(7deg);<br>
+					}<br>
+				</li>
+				<br>
+				perspective-透视 属性<br>
+				<br>
+				<ul>
+					<li>
+						 .box {<br>
+						  -webkit-perspective: 100px;<br>
+						  perspective: 100px;<br>
+						}
+					</li>
+				</ul>
+				<br>
+				transform-origin属性 <br>
+				<br>
+				要使用这个属性，必须先使用transform属性，
+				transform-origin属性允许改变元素位置。<br>
+				2D转换元素可以更改x与y轴、3D还可以改z轴 <br>
+				默认值为transform-origin: 50% 50% 0;<br>
+				<br>
+				
+			
+		</div>
+		<!-- rotate -->
+		<h2 class="title-2" id="rotate">rotate-旋转</h2>
+		<div class="area">
+			<h3 class="title-3">rotate主要值</h3>
+			rotate(angle)	定义 2D 旋转，在参数中规定角度。
+			rotate3d(x,y,z,angle)	定义 3D 旋转。
+			rotateX(angle)	定义沿着 X 轴的 3D 旋转。
+			rotateY(angle)	定义沿着 Y 轴的 3D 旋转。
+			rotateZ(angle)	定义沿着 Z 轴的 3D 旋转。
+			<h3 class="title-4">rotate-demo</h3>
+			<div class="demo">
+				<div class="code">
+					<code>
+						<h3>主要HTML</h3>
+						div.card <br>
+						&nbsp;div.box+class:rotate/? <br>
+						&nbsp;&nbsp;div.fill
+					</code>
+				</div>
+				<div class="code">
+					<code>
+						<h3>对应CSS</h3>
+						.box{ <br>
+							cursor: pointer;<br>
+						} <br>
+						.fill{ <br>
+							transition: 0.3s;<br>
+						}
+					</code>
+				</div>
+			</div>
+			<p class="explain">
+				cursor: pointer;&nbsp;&nbsp;指示该div上光标变为手型 <br>
+				transition: 0.3s;&nbsp;&nbsp;指示动画的过度时间为0.3s <br>
+				transition: property | duration | timing-function | delay;<br>
+				transition-property:规定设置过度效果的css属性名称。<br>
+				transition-duration:规定完成过度效果需要多少秒或毫秒。<br>
+				transition-timing-function:规定速度效果的速度曲线。
+				<a href="https://www.w3school.com.cn/cssref/pr_transition-timing-function.asp">【对应值...】</a><br>
+				transition-delay:规定过渡效果开始前需要等待的时间，值以秒或毫秒记。<br>
+			</p>
+			<div class="demo">
+				<div class="card">
+					<div class="box rotate">
+						<div class="fill"></div>
+					</div>
+					<p>rotate(45deg)</p>
+				</div>
+				<div class="code">
+					<code>
+						<h3>CSS</h3>
+						.rotate:hover .fill {<br>
+							transform:rotate(45deg);<br>
+						}
+					</code>
+				</div>
+			</div>
+			<p class="explain">
+				rotate(angle)	定义 2D 旋转，在参数中规定角度。<br>
+				本处未写带有css属性前缀的属性名，实际运用中需要考虑到兼容性，带上css前缀(-webkit-、-moz-等)
+			</p>
+			<div class="demo">
+				<div class="card">
+					<div class="box rotateX">
+						<div class="fill"></div>
+					</div>
+					<p>rotateX(45deg)</p>
+				</div>
+				<div class="code">
+					<code>
+						<h3>CSS</h3>
+						.rotateX:hover .fill {<br>
+							transform:rotateX(45deg);<br>
+						}
+					</code>
+				</div>
+			</div>
+			<p class="explain">
+				rotateX(angle)	定义沿着 X 轴的 3D 旋转。
+			</p>
+			<div class="demo">
+				<div class="card">
+					<div class="box rotateY">
+						<div class="fill"></div>
+					</div>
+					<p>rotateY(45deg)</p>
+				</div>
+				<div class="code">
+					<code>
+						<h3>CSS</h3>
+						.rotateY:hover .fill {<br>
+							transform:rotateY(45deg);<br>
+						}
+					</code>
+				</div>
+			</div>
+			<p class="explain">
+				rotateY(angle)	定义沿着 Y 轴的 3D 旋转。
+			</p>
+			<div class="demo">
+				<div class="card">
+					<div class="box rotateZ">
+						<div class="fill"></div>
+					</div>
+					<p>rotateZ(45deg)</p>
+				</div>
+				<div class="code">
+					<code>
+						<h3>CSS</h3>
+						.rotateZ:hover .fill {<br>
+							transform:rotateZ(45deg);<br>
+						}
+					</code>
+				</div>
+			</div>
+			<p class="explain">
+				rotateZ(angle)	定义沿着 Z 轴的 3D 旋转。
+			</p>
+			<div class="demo">
+				<div class="card">
+					<div class="box rotate3d">
+						<div class="fill"></div>
+					</div>
+					<p>rotate3d(45deg)</p>
+				</div>
+				<div class="code">
+					<code>
+						<h3>CSS</h3>
+						.rotate3d:hover .fill {<br>
+							rotate3d(.5,1,0,45deg);<br>
+						}
+					</code>
+				</div>
+			</div>
+			<p class="explain">
+				rotate3d(x,y,z,angle)	定义 3D 旋转。<br>
+				x,y,z：是一个0到１之间的数值，主要用于描述元素围绕X轴旋转的矢量值。
+			</p>
+		</div>
+		<!-- scale -->
+		<h2 class="title-2" id="scale">scale-缩放</h2>
+		<div class="area">
+			<h3 class="title-3">scale主要值</h3>
+			scale(x,y) 定义 2D 缩放转换。<br>
+			scale3d(x,y,z) 定义 3D 缩放转换。<br>
+			scaleX(x) 通过设置 X 轴的值来定义缩放转换。<br>
+			scaleY(y) 通过设置 Y 轴的值来定义缩放转换。<br>
+			scaleZ(z) 通过设置 Z 轴的值来定义 3D 缩放转换。
+			<h3 class="title-4">scale-demo</h3>
+			<div class="demo">
+				<div class="card">
+					<div class="box scale">
+						<div class="fill"></div>
+					</div>
+					<p>scale(.5,2)</p>
+				</div>
+				<div class="code">
+					<code>
+						<h3>CSS</h3>
+						.scale:hover .fill {<br>
+							transform:scale(.5,2);<br>
+						}
+					</code>
+				</div>
+			</div>
+			<p class="explain">
+				scale(x,y) 定义 2D 缩放转换。<br>
+				如果只有一个数值，那么就是xy二者相同。
+			</p>
+			<div class="demo">
+				<div class="card">
+					<div class="box scaleX">
+						<div class="fill"></div>
+					</div>
+					<p>scaleX(2)</p>
+				</div>
+				<div class="code">
+					<code>
+						<h3>CSS</h3>
+						.scaleX:hover .fill {<br>
+							transform:scaleX(2);<br>
+						}
+					</code>
+				</div>
+			</div>
+			<p class="explain">
+				scaleX(x) 通过设置 X 轴的值来定义缩放转换。
+			</p>
+			<div class="demo">
+				<div class="card">
+					<div class="box scaleY">
+						<div class="fill"></div>
+					</div>
+					<p>scaleY(2)</p>
+				</div>
+				<div class="code">
+					<code>
+						<h3>CSS</h3>
+						.scaleY:hover .fill {<br>
+							transform:scaleY(2);<br>
+						}
+					</code>
+				</div>
+			</div>
+			<p class="explain">
+				scaleY(y) 通过设置 Y 轴的值来定义缩放转换。
+			</p>
+		</div>
+		<!-- skew -->
+		<h2 class="title-2" id="skew">skew-倾斜</h2>
+		<div class="area">
+			<h3 class="title-3">skew主要值</h3>
+			skew(x-angle,y-angle)	定义沿着 X 和 Y 轴的 2D 倾斜转换。<br>
+			skewX(angle)	定义沿着 X 轴的 2D 倾斜转换。<br>
+			skewY(angle)	定义沿着 Y 轴的 2D 倾斜转换。<br>
+			<h3 class="title-4">skew-demo</h3>
+			<div class="demo">
+				<div class="card">
+					<div class="box skew">
+						<div class="fill"></div>
+					</div>
+					<p>skew(45deg,45deg)</p>
+				</div>
+				<div class="code">
+					<code>
+						<h3>CSS</h3>
+						.skew:hover .fill {<br>
+							transform:skew(45deg,45deg);<br>
+						}
+					</code>
+				</div>
+			</div>
+			<p class="explain">
+				skew(x-angle,y-angle)	定义沿着 X 和 Y 轴的 2D 倾斜转换。
+			</p>
+			<div class="demo">
+				<div class="card">
+					<div class="box skewX">
+						<div class="fill"></div>
+					</div>
+					<p>skewX(45deg)</p>
+				</div>
+				<div class="code">
+					<code>
+						<h3>CSS</h3>
+						.skewX:hover .fill {<br>
+							transform:skewX(45deg);<br>
+						}
+					</code>
+				</div>
+			</div>
+			<p class="explain">
+				skewX(angle)	定义沿着 X 轴的 2D 倾斜转换。
+			</p>
+			<div class="demo">
+				<div class="card">
+					<div class="box skewY">
+						<div class="fill"></div>
+					</div>
+					<p>skewY(45deg)</p>
+				</div>
+				<div class="code">
+					<code>
+						<h3>CSS</h3>
+						.skewY:hover .fill {<br>
+							transform:skewY(45deg);<br>
+						}
+					</code>
+				</div>
+			</div>
+			<p class="explain">
+				skewY(angle)	定义沿着 Y 轴的 2D 倾斜转换。
+			</p>
+		</div>
+		
+		<h2 class="title-2" id="translate">translate-移动</h2>
+		<div class="area">
+			<h3 class="title-3">translate主要值</h3>
+			translate(x,y)  定义 2D 转换。<br>
+			translate3d(x,y,z) 定义 3D 转换。<br>
+			translateX(x)  定义转换，只是用 X 轴的值。<br>
+			translateY(y)  定义转换，只是用 Y 轴的值。<br>
+			translateZ(z) 定义 3D 转换，只是用 Z 轴的值。
+			<h3 class="title-4">translate-demo</h3>
+			<div class="demo">
+				<div class="card">
+					<div class="box translate">
+						<div class="fill"></div>
+					</div>
+					<p>translate(45px,1em)</p>
+				</div>
+				<div class="code">
+					<code>
+						<h3>CSS</h3>
+						.translate:hover .fill {<br>
+							transform:translate(45px,1em);<br>
+						}
+					</code>
+				</div>
+			</div>
+			<p class="explain">
+				translate(x,y)  定义 2D 转换。1em是16px。
+			</p>
+			<div class="demo">
+				<div class="card">
+					<div class="box translateX">
+						<div class="fill"></div>
+					</div>
+					<p>translateX(45px)</p>
+				</div>
+				<div class="code">
+					<code>
+						<h3>CSS</h3>
+						.translateX:hover .fill {<br>
+							transform:translateX(45px);<br>
+						}
+					</code>
+				</div>
+			</div>
+			<p class="explain">
+				translateX(x)  定义转换，只是用 X 轴的值。
+			</p>
+			<div class="demo">
+				<div class="card">
+					<div class="box translateY">
+						<div class="fill"></div>
+					</div>
+					<p>translateY(45px)</p>
+				</div>
+				<div class="code">
+					<code>
+						<h3>CSS</h3>
+						.translateY:hover .fill {<br>
+							transform:translateY(45px);<br>
+						}
+					</code>
+				</div>
+			</div>
+			<p class="explain">
+				translateY(y)  定义转换，只是用 Y 轴的值。
+			</p>
+		</div>
+		
+		<h2 class="title-2" id="matrix">matrix-矩阵</h2>
+		<div class="area">
+			<h3 class="title-3">matrix主要值</h3>
+			matrix(n,n,n,n,n,n) 定义 2D 转换，使用六个值的矩阵。<br>
+			matrix3d(n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n)  定义 3D 转换，使用 16 个值的 4x4 矩阵。
+			<h3 class="title-4">matrix-demo</h3>
+			<div class="demo">
+				<div class="card">
+					<div class="box matrix">
+						<div class="fill"></div>
+					</div>
+					<p>matrix(2,2,0,2,2,0)</p>
+				</div>
+				<div class="code">
+					<code>
+						<h3>CSS</h3>
+						.translateY:hover .fill {<br>
+							transform:<br> matrix(2, 2, 0, 2, 2, 0);<br>
+						}
+					</code>
+				</div>
+			</div>
+			<p class="explain">
+				matrix(n,n,n,n,n,n) 定义 2D 转换，使用六个值的矩阵。(未理解)
+			</p>
+		</div>
+		
+		<h2 class="title-2" id="perspective">perspective-透视</h2>
+		<div class="area">
+			<h3 class="title-3">perspective主要值</h3>
+			perspective(n) 为 3D 转换元素定义透视视图。<br>
+			n是元素距离视图的距离，以像素计，越大离视图越远
+			<h3 class="title-4">perspective-demo</h3>
+			<div class="demo">
+				<div class="card perspective-100">
+					<div class="box rotateX">
+						<div class="fill"></div>
+					</div>
+					<p>
+						rotateX(45deg)<br>
+						perspective:100px
+					</p>
+				</div>
+				<div class="card perspective-200">
+					<div class="box rotateX">
+						<div class="fill"></div>
+					</div>
+					<p>rotateX(45deg)<br>perspective:200px</p>
+				</div>
+			</div>
+			<div class="demo">
+				<div class="card perspective-100">
+					<div class="box rotateY">
+						<div class="fill"></div>
+					</div>
+					<p>
+						rotateY(45deg)<br>
+						perspective:100px
+					</p>
+				</div>
+				<div class="card perspective-200">
+					<div class="box rotateY">
+						<div class="fill"></div>
+					</div>
+					<p>rotateY(45deg)<br>perspective:200px</p>
+				</div>
+			</div>
+		</div>
+		
+		<h2 class="title-2">transform-origin</h2>
+		<div class="area">
+			<h3 class="title-3">transform-origin主要值（未理解）</h3>
+			x-axis: 定义视图被置于x轴的何处，可能值：<br>
+				<ul>
+					<li>left</li>
+					<li>center</li>
+					<li>right</li>
+					<li>length</li>
+					<li>%</li>
+				</ul>
+				y-axis: 定义视图被置于y轴的何处，可能值：<br>
+				<ul>
+					<li>left</li>
+					<li>center</li>
+					<li>right</li>
+					<li>length</li>
+					<li>%</li>
+				</ul>
+				z-axis: 定义视图被置于z轴的何处，可能值：<br>
+				<ul>
+					<li>length</li>
+				</ul>
+				<br>
+			</ul>
+			<h3 class="title-4">transform-origin -demo</h3>
+			待写
+			<a href="https://c.runoob.com/codedemo/3391">菜鸟教程实例</a>
+		</div>
+		<!-- js -->
+		<script src="../jquery-3.4.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../study.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>
