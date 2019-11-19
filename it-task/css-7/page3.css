@@ -1,0 +1,125 @@
+.img{display: inline-block;background:url(images/img.png)  no-repeat;background-size:174px 256px}
+.page3-03{height:19px;width:20px;background-position:0 -72px;}
+.page3-01{height:20px;width:25px;background-position:0 -92px;}
+
+body {
+    display: flex;
+    flex-direction: column;
+    
+    margin: 0;
+    height: 100vh;
+    
+    background: rgb(52, 190, 222);
+}
+div{
+    box-sizing: border-box;
+}
+.top{
+    flex: 0 1 50px;
+    display: flex;
+    justify-content: space-between;
+    
+    vertical-align: baseline;
+    border-bottom: solid 1px rgb(81, 199, 227);
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 15px;
+    
+    color: #fff;
+} 
+main{
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    overflow: scroll;
+    
+    width: 100vw;
+}
+.page3-img {
+    margin: 10px auto 5px auto;
+}
+header {
+    width: 80%;
+    font-size: 22px;
+    font-weight: 550;
+    color: rgb(243, 200, 115);
+    margin-bottom: 5vh;
+}
+.data{
+    width: 80%;
+    margin-bottom: 2vh;
+    font-weight: 300;
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: #fff;
+}
+.data-1{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 19px 19px;
+}
+.word{
+    height: 100px;
+    width: 100vw;
+    padding-top: 5px;
+    border-bottom: solid 2px rgb(200,200,200);
+    background: #fff;
+}
+.word-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 10px;
+}
+.day {
+    font-size: 20px;
+    font-weight: 400;
+}
+.time {
+    font-size: 13px;
+    color: rgb(200,200,200);
+}
+.word-text{
+    width: 80%;
+    margin: auto;
+    color: rgb(155,155,155);
+}
+
+
+
+footer{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+    width: 100vw;
+    height: 13vh;
+    background: rgba(52, 190, 222,.5);
+}
+.btn-1,
+.btn-2 {
+    width: 40vw;
+    height: 8vh;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 2vw;
+    font-size: 18px;
+    color: #fff;
+}
+.btn-1 {
+    background: rgb(243, 112, 114);
+}
+.btn-2 {
+    background: rgb(248, 180, 69);
+}
+.btn-1 a {
+    color: #fff;
+    text-decoration: none;
+}
