@@ -7,14 +7,10 @@ body {
     background: rgb(250,250,250);
 }
 main {
-    width: 80vw;
+    width: 78vw;
     margin: auto;
 }
-@media screen and (min-width: 1200px) {
-    main {
-        width: 70vw;
-    }
-}
+
 .main-title {
     height: 6vh;
     margin: auto;
@@ -99,19 +95,57 @@ main {
         align-items: center;
     }
 }
+/* hover效果 */
+@keyframes myfirst{
+    0% {
+        top: -100%;
+    }
+    100% {top: 0;}
+}
+.hidde {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 270px;
+    height: 312px;
+    padding: 0 15px;
+    font-size: .7rem;
+    animation: myfirst 1s;
+    color: #fff;
+    background: rgba(120,120,120,.8);
+}
+.hidden-1 {
+    margin: 35px auto;
+    text-align: center;
+    font-weight: 700;
+}
+.text-item:hover .hidde {
+    display: block;
+}
 .text-item {
+    position: relative;
     display: grid;
-    grid-template-rows: 126px 57px 74px 26px 26px;
+    grid-template-rows: 41% 19% 24% 8% 8%;
     width: 270px;
     height: 312px;
     border: ridge 1px #eee;
     box-shadow: 0 2px 2px #ccc;
     margin: 2vh;
+    overflow: hidden;
+}
+@media screen and (min-height: 900px) {
+    .hidde,
+    .text-item {
+       width: 320px;
+       height: 347px;
+    }
 }
 .i-header {
     display: grid;
     grid-template-columns: 112px 1fr;
-    grid-template-rows: 126px;
+    grid-template-rows: 100%;
     justify-items: center;
     align-items: center;
     border-bottom: ridge 1px #eee;
@@ -119,7 +153,8 @@ main {
 .i-h-2 {
     justify-self: flex-start;
     align-self: flex-start;
-    padding-top: 14px;
+    padding-top: 11%;
+    padding-right: 5px;
 }
 .i-h-t {
     height: 33px;
@@ -138,6 +173,7 @@ main {
     display: flex;
     align-items: center;
     padding-left: 10px;
+    padding-right: 5px;
     border-bottom: ridge 1px #eee;
     font-size: .6rem;
 }
@@ -174,6 +210,7 @@ main {
 .i-tip {
     line-height: 26px;
     padding-left: 10px;
+    padding-right: 5px;
 }
 .i-now {
     font-size: .7rem;
@@ -188,3 +225,4 @@ main {
     white-space: nowrap;
     overflow: hidden;
 }
+

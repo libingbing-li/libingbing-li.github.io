@@ -54,7 +54,7 @@ body {
 
 /* header */
 header{
-    flex: 0 0 70px;
+    flex: 0 0 75px;
     
     background: rgb(28, 177, 119);
 }
@@ -80,91 +80,105 @@ header{
 
 /* header-pc/phone */
 .header {
+    position: relative;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding-left: 10vw;
 }
-.header-nav {
+.header-image {
+    height: 49px;
+}
+._2_03 {
+    margin-top: 1px;
+    margin-left: 10vw;
+}
+.navbar-default {
+    position: absolute;
+    z-index: 2;
     display: flex;
-    align-items: center;
     justify-content: flex-end;
+    width: 100vw;
     margin: 0;
-    padding: 0;
-    height: 45px;
     padding-right: 10vw;
-    list-style: none;
+    border: none;
+    background-color: transparent;
 }
-.header-nav a{
-    display: flex;
+
+.navbar-default .nav a:hover {
+    border-bottom: 3px solid #fff;
+}
+.navbar-default .navbar-nav > li > a {
+    /* display: flex;
     justify-content: center;
-    
-    height: 45px;
-    width: 5vw;
-    font-size: 0.625rem;
+    align-items: center; */
+    margin: 0;
+    padding: 0 15px;
     text-align: center;
-    line-height: 45px;
-    
+    line-height: 50px;
+    height: 50px;
     color: #fff;
+    background: rgb(28, 177, 119);
 }
-.header-nav a:hover {
-    text-decoration: none;
-    border-bottom: solid 3px #fff;
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #fff;
+    background: rgb(28, 177, 119);
 }
-@media screen and (max-width: 400px) {
-    ._2_03 {
-        display: none;
-    }
-    .header {
-        display: block;
-        padding-left: 0;
-        position: absolute;
-        top: 37.5px;
-        right: 0;
-        z-index: 1;
-        width: 50px;
-        height: 100px;
-        background: url(images/page2-01.png) no-repeat;
-        background-size: 20px 20px;
-        background-position: center top;
-    }
-    .header-nav {
-        display: none;
-    }
-    .header-nav a{
-        height: 20px;
-        width: 50px;
-        font-size: 10px;
-        line-height: 20px;
-        border-bottom: solid 1px rgb(27,167,111);
-    }
-    .header-nav a:hover {
-        text-decoration: none;
-        border-bottom: solid 1px rgb(27,167,111);
-        background: rgb(22, 141, 94);
-    }
-    .header:hover .header-nav{
-        position: absolute;
-        top: 32.5px;
-        right: 0;
-        z-index: 1;
-        display: flex;
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #fff;
+    background: rgb(28, 177, 119);
+}
+/* Mobile version */
+
+.navbar-default .navbar-toggle {
+    margin-right: 10vw;
+    border-color: #DDD;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background: rgb(28, 177, 119);
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #CCC;
+}
+@media (max-width: 767px) {
+    .navbar-default {
         flex-direction: column;
-        
-        width: 50px;
-        height: 80px;
         padding: 0;
-        border-top: solid 1px rgb(27,167,111);
-        
-        background: rgb(28, 177, 119);
     }
-
+    .navbar-collapse {
+        padding: 0;
+        border-color: #ccc;
+    }
+    .navbar-default .navbar-nav {
+        width: 100vw;
+        margin: 0;
+    }
+    .navbar-default .navbar-nav > li > a {
+        height: 50px;
+        color: #fff;
+        font-size: 1rem;
+    }
+    .navbar-default .navbar-nav > li > a:hover,
+    .navbar-default .navbar-nav > li > a:focus {
+        border: none;
+        color: #fff;
+        background: rgb(24, 150, 100);
+    }
+    .navbar-default .navbar-nav > .active > a:hover,
+    .navbar-default .navbar-nav > .active > a:focus {
+        color: #fff;
+        background: rgb(24, 150, 100);
+    }
+    
 }
-
-
 
 
 /* main */
+.carousel-indicators {
+    z-index: 1;
+}
 main {
     flex: 1 0 auto;
     background: rgb(250,250,250);
@@ -217,7 +231,7 @@ main {
     grid-area: 1/4/4/5;
     border-right: dashed 1px #ccc;
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
     .data {
         display: flex;
         flex-direction: column;
@@ -285,12 +299,30 @@ main {
     margin-right: 20px;
     
 }
-@media screen and (min-width: 1270px) {
-    .step-img-4 {
-        display: none;
+.step-img-4,
+.step-img-8 {
+    visibility: hidden;
+}
+
+@media screen and (max-width: 1920px) and (min-width: 1650px) {
+    .step {
+        width: 65%;
+    }
+    .image_07,
+    .image_10,
+    .image_03,
+    .image_05{transform: scale(1.1);}
+}
+@media screen and (max-width: 1350px) {
+    .step {
+        width: 50%;
+    }
+    .step-img-4,
+    .step-img-8{
+        visibility: visible;
     }
 }
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 500px) {
     .step-1,
     .step {
         flex-direction: column;
@@ -303,14 +335,16 @@ main {
         transform: rotate(90deg);
         margin-bottom: 2vh;
     }
-    
+    .step-img-8{
+        display: none;
+    }
 }
 /* 人脉 */
 .caption {
     height: 10vh;
     text-align: center;
     line-height: 10vh;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 700;
 }
 .human {
@@ -326,34 +360,32 @@ main {
     grid-template-rows: 40% 10% 50%;
     justify-items:center;
     align-items: center;
-    width: 190px;
-    height: 260px;
+    width: 15vmax;
+    height: 25vmax;
     border: ridge 1px #ccc;
     box-shadow: 0 2px 2px #ccc;
+    margin: auto;
     margin-bottom: 3vh;
     background: #fff;
 }
 .human-title {
-    font-size: 17px;
+    font-size: 1.5vmax;
     font-weight: 700;
 }
 .human-text {
     padding: 20px;
-    font-size: 13px;
+    font-size: 1vmax;
     color: #999;
 }
-@media screen and (max-width: 500px) {
-    .human {
-        justify-content: center;
+@media screen and (max-width:1000px) {
+    .human-1 {
+        width: 20vmax;
+        height: 30vmax;
     }
-}
-.active {
-    background: #000000;
 }
 /* 企业 */
 .company {
     display: flex;
-    justify-content: space-around;
     width: 80vw;
     margin: auto;
     border: ridge 1px #eee;
@@ -365,21 +397,22 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 168px;
-    height: 123px;
+    width: 16vw;
+    height: 10vw;
 }
 .company-1:hover {
     border: ridge 1px #eee;
     box-shadow: 0 2px 2px #ccc;
     box-shadow: 0 -2px 2px #ccc;
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1100px) {
     .company {
         flex-direction: column;
         align-items: center;
+        width: 60vw;
     }
     .company-1 {
-        width: 80vw;
+        width: 60vw;
     }
 }
 

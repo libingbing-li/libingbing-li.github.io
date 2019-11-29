@@ -1,3 +1,4 @@
+
 .main-img {
     width: 100vw;
     margin-bottom: 3vh;
@@ -20,6 +21,7 @@ ul {
 }
 .main {
     display: flex;
+    height: 90vh;
     margin-bottom: 5vh;
 }
 .main-1,
@@ -44,8 +46,8 @@ ul {
     grid-template-columns: 1fr 4fr;
     align-items: center;
     height: 42px;
-    padding-left: 2vw;
-    padding-right: 2vw;
+    width: 65px;
+    margin: auto;
 }
 .main-item:hover {
     color: rgb(255,173,113);
@@ -81,12 +83,11 @@ ul {
     
 }
 ._2_09 {
-    flex: 1 0 40%;
+    flex: 0 0 auto;
 }
 .main-2-text {
     text-indent: 2em;
-    padding: 0 3vw;
-    padding-bottom: 10px;
+    padding: 10px 3vw;
 }
 
 @media screen and (max-width: 400px) {
