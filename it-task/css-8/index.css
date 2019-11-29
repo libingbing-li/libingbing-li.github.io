@@ -369,12 +369,12 @@ main {
     background: #fff;
 }
 .human-title {
-    font-size: 1.5vmax;
+    font-size: 1.3vmax;
     font-weight: 700;
 }
 .human-text {
     padding: 20px;
-    font-size: 1vmax;
+    font-size: .9vmax;
     color: #999;
 }
 @media screen and (max-width:1000px) {
