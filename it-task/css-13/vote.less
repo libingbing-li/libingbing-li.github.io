@@ -1,0 +1,148 @@
+@import (reference) "less-need.less";
+//h
+@wordH: 2.5rem;
+@moreImgH: 1.875rem;
+//w
+@moreW: 8.4375rem;
+@audioW: 1.5625rem;
+//color
+@wordColor: rgb(186,233,244);
+@moreBorderColor: #fff;
+@moreNameBColor:  rgb(243, 200, 129);
+@moreNumberBColor: rgb(130, 175, 155);
+@audioBColor: rgb(248, 180, 69);
+//布局
+body {
+    background: @mainBColor;
+}
+
+/* top */
+.h-top{
+    flex: 0 1 @hH;
+    @flexA();
+    justify-content: space-between;
+    padding: 0 @space;
+    font-size: @fontSize*1.3;
+    text-align: center;
+    color: @btnColor;
+}
+.h-word {
+    flex: 0 0 ;
+    display: grid;
+    grid-template-rows: @wordH @wordH*.3 @wordH*.4;
+    
+    .word{
+        @flexAJsb();
+        padding: 0 @space 0 @space*3;
+        background: @wordColor;
+    }
+    .header-triangle{
+        width: 0;
+        height: 0;
+        margin-left: @space*3;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 10px solid @wordColor;
+    }//对话框小三角
+    .header-3{
+        margin-left: @space*3;
+        font-size: @fontSize;
+        font-weight: 300;
+        letter-spacing: 0.125rem;
+        color: @btnColor;
+    }
+}
+
+main{
+    flex: 1 1 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,@moreW+@space*4);
+    grid-template-rows: repeat(auto-fill,@moreW+@space*6+@moreImgH);
+    justify-content: space-around;
+    align-items: center;
+    @overflowY();
+}
+.more {
+    @flexC();
+    align-items: center;
+    width: @moreW;
+    padding: @space*2;
+    box-sizing: content-box;
+    .more__div {
+        @flexC();
+        width: @moreW;
+        height: @moreW;
+        border: solid 3px @moreBorderColor;
+        margin-bottom: @space*2;
+        background: @moreNameBColor;
+        box-sizing: content-box;
+        
+        &__name {
+            flex: 1 1 70%;
+            font-size: @fontSize*1.2;
+            text-align: center;
+            line-height: @moreW*.7;
+        }
+        &__number {
+            flex: 0 1 30%;
+            background: @moreNumberBColor;
+            text-align: center;
+            line-height: @moreW*.3;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: @btnColor;
+        }
+    }
+    &__img {
+        height: @moreImgH;
+    }
+}
+
+
+
+footer{
+    flex: 0 1 @fH;
+    @flexAJ();
+    
+    .f-btn{
+        width: 70vw;
+        height: 80%;
+        font-size: @fontSize*1.7;
+        color: @btnColor;
+        background: @titleColor;
+    }
+}
+
+
+//功能模块
+.more {
+    &__img--hidden {display: none;}
+    &:hover &__img--hidden{
+        display: block;
+    }
+}//图标出现
+
+//音频按钮
+.audio-btn {
+    @flexAJ();
+    width: @audioW;
+    height: @audioW;
+    border-radius: 50%;
+    background: @audioBColor;
+    
+    &-1{
+        width: 0;
+        height: 0;
+        border-left: solid @audioW*.6 #fff;
+        border-bottom: solid @audioW*.32 transparent;
+        border-top: solid @audioW*.32 transparent;
+        margin-left: @audioW*.16;
+    }//暂停样式
+    &-2 {
+        width: @audioW*.45;
+        height: @audioW*.6;
+        border-left: @audioW*.12 solid #fff;
+        border-right: @audioW*.12 solid #fff;
+    }//播放样式
+}
+

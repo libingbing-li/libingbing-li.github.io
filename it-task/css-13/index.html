@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>CSS-13-首页-7重写</title>
+        <meta name="viewport" content="
+        width=device-width,initial-scale=1.0,user-scalable=no
+        "/>
+		
+        <link rel="stylesheet" href="base.css">
+        <link rel="stylesheet/less" type="text/css" href="index.less" />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.10.0-beta/less.min.js" ></script>
+	</head>
+	<body>
+		<header>
+            <label for="nav"><div class="img page1-02"></div></label>
+        </header>
+        <input type="checkbox" id="nav">
+        <!-- 使用复选框，如果是单选那么选中就不可以取消，复选可以选中-取消 -->
+        <ul class="nav"  title="页面初始化时回退动画执行，css未找到解决办法，js部分再解决">
+            <li>公告</li>
+            <li>设置</li>
+            <li>帮助</li>
+            <li>关于</li>
+        </ul>
+        <main>
+            <div class="m-top">
+                <span class="m-top__text">上次游戏：捉鬼猜词版</span>
+                <div class="img page1-01 m-top__img"></div>
+            </div class="main-bottom">
+            <div class="m-main">
+                <div class="triangle"></div>
+                <div class="m-main__top">
+                    捉鬼游戏
+                </div>
+                
+                <div class="m-main__text">
+                   <div>
+                        <button class="m-main__text__btn">
+                           <a href="vote.html" title="点击到达下一个页面">简化版</a>
+                        </button>
+                        <div class="m-main__text__text">有1133个用户正在玩此款游戏</div>
+                   </div>
+                   <div>
+                        <button class="m-main__text__btn">
+                            <a href="vote.html" title="点击到达下一个页面">猜词版</a>
+                        </button>
+                        <div class="m-main__text__text">有1133个用户正在玩此款游戏</div>
+                   </div>
+                   
+                   <div>
+                       <button class="m-main__text__btn">
+                           <a href="vote.html" title="点击到达下一个页面">简化版</a>
+                       </button>
+                       <div class="m-main__text__text">有1133个用户正在玩此款游戏</div>
+                   </div>
+                </div>
+                
+            </div>
+        </main>
+    </body>
+</html>

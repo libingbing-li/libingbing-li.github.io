@@ -1,0 +1,35 @@
+/* 重置 */
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    height: 100vh;
+}
+button {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+* {box-sizing: border-box;}
+/* 原子类 */
+
+ 
+ 
+/* 雪碧图 */
+.img{display: inline-block;background:url(images/img.png)  no-repeat;background-size:174px 256px}
+.page1-01{height:20px;width:12px;background-position:0 0;}
+.page1-02{height:13px;width:17px;background-position:0 -20px;}
+.page2-02{height:17px;width:18px;background-position:0 -34px;}
+.page2-01{height:20px;width:19px;background-position:0 -51px;}
+.page3-03{height:19px;width:20px;background-position:0 -72px;}
+.page3-01{height:20px;width:25px;background-position:0 -92px;}
