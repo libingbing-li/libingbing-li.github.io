@@ -1,0 +1,989 @@
+
+
+/*
+颜色备份
+主色调:#46d367;
+更深：#27783a;
+ */
+
+/* 弹窗出现时阻止其他点击事件 */
+.window-cover {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index:3;
+    width: 100%;
+    height: 100%;
+    opacity: .1;
+    background-color: #999;
+}
+/* 总结小窗口 */
+.total-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    transform: translate(-50%,-50%);
+    width: 16rem;
+    height: auto;
+    border: solid 2px #367e31;
+    background: #fff;
+}
+.total-window-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.total-header {
+    position: relative;
+    flex: 0 0 2.3rem;
+    width: 100%;
+    font-size: 1.3rem;
+    font-weight: 800;
+    text-align: center;
+    line-height: 2.3rem;
+    border-bottom: solid 2px #367e31;
+    color: #367e31;
+}
+
+.total-select,
+.total-title{
+    position: relative;
+    flex: 0 0 1.5rem;
+    display: flex;
+    width: 100%;
+    border-bottom: solid 2px #367e31;
+    font-size: .9rem;
+    font-weight: 800;
+    color: #367e31;
+}
+.total-select-btn {
+    flex: 0 0 25%;
+    border-left: solid 2px #367e31;
+    text-align: center;
+    line-height: 1.5rem;
+}
+.total-select-btn-0 {
+    border-left: none;
+}
+.total-title {
+    text-align: center;
+    line-height: 1.5rem;
+}
+.total-title-text{
+    flex: 1 1 auto;
+}
+.total-title-btn-0 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 15%;
+}
+.total-title-btn-1 {
+    flex: 0 0 15%;
+    justify-self: flex-end;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* 总结-百分比 */
+.total-percent {
+    position: relative;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    margin: 2rem auto;
+    background: #367e31;
+    background-image: linear-gradient(to right, transparent 50%, #eee 0);
+}
+ 
+.total-percent-turn {
+    margin-left: 50%;
+    width: 4rem;
+    height: 8rem;
+    /* border-top-left-radius: 0px 50%;  0是水平，50%是垂直1*/
+    border-top-right-radius: 100% 50%;
+    border-bottom-right-radius: 100% 50%;
+    /* border-bottom-left-radius: 0px 50%; */
+    /* border-radius: 0 100% 100% 0/50%; */ 
+    /* 
+    border-radius: 0 100% 100% 0/50%;
+    =
+    border-top-left-radius: 0 50%: 0对应top，50%对应left
+    border-top-right-radius: 100% 50%;
+    border-bottom-right
+    border-bottom-left
+     */
+    /* /表示非等比的情况 */
+    background-color: #fff;
+    transform-origin: left;
+    /* transform: rotate(.2turn);  */
+    /* 1turn = 360deg */
+}
+.total-percent-center{
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 6rem;
+    background: #fff;
+}
+/* 总结 清单 */
+.total-tip{
+    flex:0 0 2rem
+    width: 100%;
+    text-align: center;
+    line-height: 2rem;
+}
+.total-num{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: .5rem 1rem;
+}
+.total-num-item{
+    width: 100%;
+    height: 2.5rem;
+    font-size: .7rem;
+}
+/* 最长为60% */
+.total-num-item-1{
+    display: inline-block;
+    width: 60%; 
+    /* 设置为总的，之后更改 */
+    height: .5rem;
+    border-radius: .25rem;
+    background: #367e31;
+    margin-right: .5rem;
+    margin-top: .3rem;
+}
+/* 选择小窗口 (点击出现) */ 
+.select-window {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 4;
+    transform: translate(-50%,-50%);
+    
+    width: 16.45rem;
+    min-height: 17.2rem;
+    overflow: hidden;
+    border: solid 1px #46d367;
+    color: #999;
+    background-color: #fff;
+}
+.select-window-main{
+    flex: 1 1 auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.select-window-item{
+    position: relative;
+    display: block;
+    width: 16.45rem;
+    height: 3.44rem;
+    text-align: center;
+    line-height: 3.44rem;
+    border-bottom: solid 1px #46d367;
+    background: white;
+}
+.select-window-item-style {
+    position: absolute;
+    left: 1.175rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.29rem;
+    height: 1.29rem;
+    border-radius: 50%;
+    margin-right: 1.175rem;
+}
+.select-window-btn-1,
+.select-window-btn-0{
+    position: fixed;
+    bottom: 0;
+    width: 8.225rem;
+    height: 2.15rem;
+    border-top: solid 1px #46d367;
+    color: #999;
+    background-color: #fff;
+}
+.select-window-btn-1 {
+    left: 0;
+    border-right: solid 1px #46d367;
+}
+.select-window-btn-0 {
+    right: 0;
+    border-left: solid 1px #46d367;
+}
+/* 选择窗口-日历 */
+.select-time-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 70%;
+    height: 2.15rem;
+    margin: auto;
+    margin-top: .86rem;
+    border-bottom: solid 3px #00cb62;
+}
+.select-time-day{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    margin: .43rem auto;
+}
+.select-time-main {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: auto;
+}
+.select-time-item {
+    flex: 0 0 14.28%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: .86rem;
+    color: #999;
+}
+.select-time-empty {
+    display: none;
+}
+.select-time-more {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+}
+.select-time-more-btn {
+    width: 4.7rem;
+    height: 2.15rem;
+    margin:.43rem 0;
+    border-bottom: solid 2px #00CB62;
+    color: #999;
+    background: #fff;
+}
+
+/* 更多小窗口 (点击出现) */ 
+.more-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 4;
+    transform: translate(-50%,-50%);
+    
+    width: 16.45rem;
+    height: 10.75rem;
+    overflow: hidden;
+    border: solid 1px #46d367;
+    color: #999;
+    background-color: #fff;
+}
+.more-window-main{
+    position: absolute;
+    left: 0px;
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16.45rem;
+    height: 8.6rem;
+    padding: .705rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: white;
+}
+.more-input {
+    width: 70%;
+    height: 2.15rem;
+    margin-left: 1.175rem;
+    outline: none;
+    border: none;
+    border-bottom: solid 2px #46d367;
+    font-size: 1rem;
+    line-height: 2.15rem;
+    padding-left: .47rem;
+}
+/* 时期 */
+.more-time {
+    flex-direction: column;
+    overflow: hidden;
+}
+.more-time-cycle-input{
+    width: 1.8rem;
+    height: 1.2rem;
+    box-sizing: content-box;
+    text-align: center;
+    margin: 0;
+    margin: 1px;
+    padding: 0;
+}
+.more-window-time-btn {
+    width: 16.45rem;
+    height: 2.15rem;
+    text-align: center;
+    line-height: 2.15rem;
+    border-bottom: solid 1px #46d367;
+    background:none;
+}
+/* 任务编辑 */
+.more-task-edit{
+    display: flex;
+    flex-direction: column;
+}
+.more-task-edit-box {
+    position: absolute;
+    top: 1.29rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 16.45rem;
+    padding:0 1.8rem;
+}
+.more-task-edit-input {
+    width: 80%;
+    outline: none;
+    background: transparent;
+    border:none; 
+    border-bottom: solid 3px #46d367; 
+    font-size: 1rem;
+    padding-left: .47rem;
+}
+.more-task-edit-btn {
+    border-bottom: 2px solid #46d367;
+    margin: 0 .125rem;
+    background: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    
+}
+/* 清单相关 */
+.more-tasks-eidt-delate {
+    position: absolute;
+    bottom: 1.29rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4.7rem;
+    height: 1.29rem;
+    margin: auto;
+    font-size: .86rem;
+    line-height: 1.29rem;
+    text-align: center;
+    border-radius: .645rem;
+    color: #fff;
+    background-color: #FF0000;
+}
+.tasks-color-btn{
+    width: 1.29rem;
+    height: 1.29rem;
+    border-radius: 50%;
+}
+/* 目标相关 */
+.star-new-time,
+.star-new-tasks{
+    position: absolute;
+    top: 1.29rem;
+    height: 1.29rem;
+    padding: 0 .47rem;
+    font-size: .86rem;
+    line-height: 1.29rem;
+    border-bottom: solid 2px #00CB62;
+}
+.star-new-time {
+    left: 1.88rem;
+}
+.star-new-tasks{
+    right: 1.88rem;
+}
+.more-star-finish {
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.28rem 1.175rem 1.28rem 1.175rem;
+    font-size: 1.1rem;
+    color: #000;
+}
+.star-finish-tip {
+    font-size: 1rem;
+    color: #999;
+}
+
+/* 更多窗口-按钮 */
+.more-window-btn-1,
+.more-window-btn-0{
+    position: fixed;
+    bottom: 0;
+    width: 8.225rem;
+    height: 2.15rem;
+    border-top: solid 1px #46d367;
+    color: #999;
+    background-color: #fff;
+}
+.more-window-btn-1 {
+    left: 0;
+    border-right: solid 1px #46d367;
+}
+.more-window-btn-0 {
+    left: 8.225rem;
+    right: 0;
+    border-left: solid 1px #46d367;
+}
+
+
+/* 包裹了页面的容器div */
+.main{
+    position: relative;
+    left: 0px;
+    height: 100%;
+    overflow:hidden;
+}
+/* 之所以设置style，是因为js设置的就是元素的style属性，而transition第一次之所以不起作用，是因为只有side有left属性，而.body不存在
+所以不会起到过度效果，现在可以了 left设置0px:为了方便js判断，所以带单位 */
+
+/* 首栏底栏 */
+header,
+footer {
+    position: absolute;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    width: 100%;
+    height: 7%; 
+    color: #fff;
+    background: #46d367;
+}
+
+header {
+    top: 0;
+    padding: 0 1.175rem;
+}
+footer {
+    bottom: 0;
+    padding: 0 3.055rem;
+}
+
+
+/* 页面 */
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    position: relative;
+    width: 100%;
+    height: 86%;
+    margin-top: 3rem;
+    overflow: hidden;
+    background: #fff;
+}
+ /* 侧边栏列表 */
+.side-list {
+    position: fixed;
+    top: 0;
+    left: -70%;
+    width: 70%;
+    height: 100%;
+    overflow: hidden;
+    color: #999;
+    background: white;
+}
+.side-title {
+    width: 90%;
+    height: 3rem;
+    margin-right: 2.35rem;
+    padding-left: 10%;
+    border-bottom: 5px solid #00CB62;
+    font-size: 1.29rem;
+    line-height: 3.01rem;
+}
+.side-main{
+    width: 100%;
+    height: 93%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.side-box {
+    position: relative;
+    flex: 0 0 auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.side-name-style {
+    width: 1.29rem;
+    height: 1.29rem;
+    border-radius: 50%;
+    margin-right: 1.175rem;
+    background-color: #00FFB3;
+}
+.side-name {
+    display: flex;
+    align-items: center;
+    width: 92%;
+    height: 3.01rem;
+    margin-left: 8%;
+    border-bottom: solid 1px #46d367;
+}
+.side-tasks-edit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: solid 6px #999;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+}
+.side-tasks {
+    margin-left: 8%;
+    height: 0px;
+    max-height: 12.9rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.side-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 90%;
+    height: 2.15rem;
+    margin-left: 10%;
+    padding-left: .47rem;
+    line-height: 2.15rem;
+    border-bottom: solid 1px #46d367;
+}
+.side-btn {
+    padding-left: 1.5rem;
+}
+/* 任务页 */
+/* tip */
+.task-tip {
+    justify-self: flex-end;
+    flex: 0 0 auto;
+    width: 11.75rem;
+    height: 1.29rem;
+    margin:1.5rem auto;
+    font-size: .7rem;
+    text-align: center;
+    line-height: 1.29rem;
+    border-radius: 3px;
+    opacity: .5;
+    color:#000;
+    background: #ddd;
+}
+/* 输入部分 */
+.task-input-box {
+    position: sticky;
+    top: 0;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    
+    height: 6.45rem;
+    width: 100%;
+}
+.task-input-box-1,
+.task-input-box-2 {
+    width: 85%;
+    height: auto;
+}
+.task-input-style {
+    display: inline-block;
+    width: .86rem;
+    height: .86rem;
+    background-color: #46d367;
+}
+.task-input {
+    width: 90%;
+    outline: none;
+    background: transparent;
+    border:none; 
+    border-bottom: solid 3px #46d367; 
+    font-size: 1rem;
+    padding-left: .47rem;
+}
+.task-input-box-2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.task-input-btn {
+    min-width: 1.5rem;
+    max-width: 4rem;
+    height: 1.505rem;
+    border-radius: .7525rem;
+    padding: 0 .47rem;
+    line-height: 1.6rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    color: #fff;
+    background-color: #00c75d;
+}
+.task-input-btn-1 {
+    max-width: 9rem;
+}
+/* 任务展示页面  用粘性定位 (侧边栏) */
+.tasks-main {
+    flex: 1 1 auto;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.tasks-box {
+    position: relative;
+    flex: 0 0 auto;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.tasks-name {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 3.01rem;
+    padding-left: 1.175rem;
+    border-bottom: solid 1px #ccdda3;
+}
+.tasks-name-text{
+    margin-left: 1.29rem;
+    padding-left: 1.29rem;
+    border-left: solid 3px #8ae8b2;
+}
+.tasks {
+    height: 0px;
+    max-height: 12.9rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+/* task组件显示 */
+.task-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 87%;
+    height: 2.15rem;
+    margin-left: 3.055rem;
+    padding-left: .47rem;
+    border-bottom: solid 1px #ccdda3;;
+}
+.task-show-item-style {
+    flex: 0 0 .86rem;
+    height: .86rem;
+    border: solid 1px;
+    margin-right: .705rem;
+}
+.task-show-item-text {
+    flex: 1 1 auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+.task-show-item-moreinfo {
+    flex:0 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: .6rem;
+    margin-right: .7rem;
+}
+.task-show-item-star {
+    max-width: 3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+.task-show-item-edit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: solid 6px #999;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+}
+
+/* 目标 */
+.star {
+    overflow: hidden;
+}
+.star-notask {
+    margin-top: 1rem;
+    margin-bottom: -0.43rem;
+}
+.star-btn {
+    width: 4.7rem;
+    height: 1.505rem;
+    border-radius: 0.7525rem;
+    margin: 1rem;
+    color: #fff;
+    background-color: #00cb62;
+}
+.star-finish-btn {
+    position: absolute;
+    bottom: 3.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    height: 1.505rem;
+    border-radius: .7525rem;
+    padding: 3px 6px;
+    color: #fff;
+    background-color: #00cb62;
+}
+/* 目标展示 */
+.star-show {
+    display: flex;
+    flex-direction: column;
+    width: 98%;
+    padding: .7rem;
+    margin-left: 2%;
+    border-left: solid 5px #00cb62;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.star-box {
+    position: relative;
+    flex: 0 0 auto;
+    width: 100%;
+}
+
+.star-name{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    height: 2.15rem;
+    padding-left: 2.35rem;
+    margin: auto;
+    border-bottom: solid 3px #00ffb3;
+    font-size: 1.1rem;
+}
+.star-name-text {
+    flex:1 1 auto;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow:ellipsis;
+    background: transparent;
+}
+.star-name-moreinfo{
+    flex:0 0 auto;
+}
+.star-name-style {
+    position: absolute;
+    left: .705rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: .9rem;
+    height: .9rem;
+    border: solid 0.125rem #ccc;
+}
+.star-name-time,
+.star-name-tasks {
+    height: .86rem;
+    padding: 0 .47rem;
+    font-size: .43rem;
+    line-height: .86rem;
+    text-align: right;
+    color: #999;
+}
+.star-tasks {
+    width: 80%;
+    margin: auto;
+    max-height: 12.9rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.star-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 95%;
+    height: 2.15rem;
+    margin-left: 5%;
+    padding-left: .705rem;
+    border-bottom: solid 1px #46d367;
+}
+.star-item-notask{
+    width: 95%;
+    height: 2.15rem;
+    line-height: 2.15rem;
+    margin-left: 5%;
+    padding-left: .705rem;
+    border-bottom: solid 1px #46d367;
+}
+.star-finish {
+    position: relative;
+    display: none;
+    width: 100%;
+    height: 100%;
+    padding: 1rem .2rem;
+}
+.star-finish-background{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    opacity: .4;
+}
+.star-finish-time {
+    position: absolute;
+    top: 1.29rem;
+    right: .705rem;
+    font-size: .7rem;
+}
+.star-finish-description-title{
+    display: flex;
+    align-items: center;
+    height: .86rem;
+    width: 100%;
+    margin-top: .43rem;
+    font-size:.8rem;
+    line-height: .86rem;
+}
+.star-finish-description-title-border{
+    height: 20%;
+    width: 60%;
+}
+.star-finish-description {
+    width:100%;
+    margin-top: .43rem;
+    font-size: 1.2rem
+}
+
+/* 日历 */
+.time-title {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 70%;
+    height: 2.15rem;
+    margin-top: 1.29rem;
+    border-bottom: solid 3px #00cb62;
+}
+.time-day{
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 91%;
+    margin: .86rem auto 0 auto;
+}
+.time-main {
+    flex: 0 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    width: 91%;
+    margin: 0 auto;
+}
+.time-item {
+    position: relative;
+    flex: 0 0 14.28%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4.3rem;
+    font-size: 1.29rem;
+    color: #999;
+}
+.time-item-tasks {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    width: 3.055rem;
+    height: 4.3rem;
+    opacity: .4;
+}
+.time-item-star {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: solid 6px transparent;
+}
+.time-empty{
+    display: none;
+}
+.time-task {
+    flex:1 1 auto;
+    width: 100%;
+    border-top: solid 2px #3ebe5c;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.time-task-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 92%;
+    height: 3.01rem;
+    margin-left: 1.88rem;
+    padding: 0 .705rem;
+    border-bottom: solid 2px #42ca62;
+    color: #999;
+}
+.time-task-star {
+    flex: 1 1 auto;
+    font-size: .645rem;
+    text-align: right;
+}
+.time-star-item-style {
+    width: .43rem;
+    height: 1.505rem;
+    margin-right: .705rem;
+}
+
+
+
+
+/* 完成任务后添加的css */
+.finish {
+    text-decoration: line-through;
+    color: #bbb;
+    border-color: #bbb;
+}
+.finish-style {
+    border: none;
+    background-color: #bbb;
+}
+
+
+/* 动画部分需要css */
+/* 默认该选项 */
+#morePeriod_0 {
+    background: #eee;
+}
+#selectNoStar {
+    background: #eee;
+}
+/* 点击侧边栏滑出/入 */
+.side-list,
+.main {
+    transition: left .5s;
+}
+/* 点击展现清单 */
+.tasks,
+.star-tasks,
+.side-tasks{
+    transition: height .5s; 
+}

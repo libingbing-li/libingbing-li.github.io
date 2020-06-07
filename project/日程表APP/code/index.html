@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>日程表毕业设计-渭师范数统信本161李冰冰</title>
+    
+    <link rel="stylesheet" type="text/css" href="./css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/index.css"/>
+    
+    <script type="text/javascript">
+    	// WebSettings webSettings = webview.getSettings();
+    	//如果访问的页面中要与Javascript交互，则webview必须设置支持Javascript
+    	// webSettings.setJavaScriptEnabled(true);
+    	// webSettings.setDomStorageEnabled(true);
+   		document.addEventListener('plusready', function(){
+            //console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
+        })
+    </script>
+</head>
+
+<!-- 要做单页面应用，保证各个页面之间切换的流畅性，所以只有一个html -->
+<body id="body">
+    <!-- 当某个弹窗没解决时，不允许点击其他事件  一个弹窗出现时，这个版块就出现 z-index为1，覆盖下一层，不会触发他们的点击事件-->
+    <div class="window-cover" id="windowCover"></div>
+    <!-- 总结小窗口（点击出现） -->
+    <div class="total-window" id="totalWindow" v-show="show">
+        <!-- 退出 -->
+        <div class="total-header">
+            Total
+            <button type="button" class="total-window-close" @click="btnClose">
+                <div class="button-total-img button-close-img"></div>
+            </button>
+        </div>
+        <!-- 选择日（本日 3.2）/周（本周 3.7-3.14）/ 月（2020.3）/年（2020）-->
+        <div class="total-select">
+            <div class="total-select-btn total-select-btn-0" @click="selectPeriod('day')">日</div>
+            <div class="total-select-btn"  @click="selectPeriod('week')">周</div>
+            <div class="total-select-btn" @click="selectPeriod('month')">月</div>
+            <div class="total-select-btn" @click="selectPeriod('year')">年</div>
+        </div>
+        <!-- 标题 -->
+        <div class="total-title">
+            <button class="total-title-btn-0" @click="lastBtn">
+                <div class="button-total-img button-left-img"></div>
+            </button>
+            <div class="total-title-text">{{title}}</div>
+            <button class="total-title-btn-1" @click="nextBtn">
+                <div class="button-total-img button-right-img"></div>
+            </button>
+        </div>
+        <!-- 完成率 -->
+        <div class="total-percent">
+            <div class="total-percent-turn" :style="turnStyle"></div>
+            <div class="total-percent-center">{{percentage}}</div>
+        </div>
+        <div class="total-tip" v-show="noTask">
+            当前无完成任务
+        </div>
+        <!-- 各个清单任务完成数 -->
+        <div class="total-num" v-show="!noTask">
+            <div class="total-num-item">
+                <div>全部任务</div>
+                <div class="total-num-item-1"></div>
+                <span>完成{{totalNum}}个任务</span>
+            </div>
+            <!-- 组件 -->
+            <total-num-item
+            v-for=" (item,index) of numList "
+            v-bind:item = "item"
+            v-bind:index = "index"
+            ></total-num-item>
+        </div>
+    </div>
+    
+    <!-- 清单任务列表 -->
+    <div class="side-list" id="sideList">
+        <div class="side-title">
+            全部清单
+        </div>
+        <div class="side-main">
+            <tasks-show
+            v-for = " (item,index) of tasksList "
+            v-bind:item = "item"
+            v-bind:index = "index"
+            v-bind:tasklist = "item.task"
+            showtask = "tasks"
+            ></tasks-show>
+            <div class="side-name side-btn" @click="newTasks">新建清单</div>
+        </div>
+    </div>
+    
+    <!-- 选择小窗口 （总窗口）内中小窗口可滑动 -->
+    
+    <div class="select-window" id="selectWindow" v-show="show">
+        <!-- 1.清单选择界面 -->
+        <div class="select-window-main" v-show="tasksSwitch">
+            <!-- 新建清单 点击后转到新建清单-->
+            <div class="select-window-item" @click="newTasks">新建清单</div>
+            <!-- 已有清单 点击更改对应vue实例数据-->
+            <tasks-s-item 
+            v-for="(item,index) of tasksList"
+            v-bind:item = "item"
+            v-bind:index = "index"
+            ></tasks-s-item>
+        </div>
+        <!-- 2.目标选择界面 -->
+        <div class="select-window-main" v-show="starSwitch">
+            <!-- 新建目标 点击后转到新建目标-->
+            <div class="select-window-item" @click="newStar">新建目标</div>
+            <!-- 无目标 -->
+            <div class="select-window-item" @click="noStar" id="selectNoStar">无目标</div>
+            <!-- 已有目标 点击更改对应vue实例数据 -->
+            <star-s-item
+            v-for="(item,index) of starList"
+            v-bind:item = "item"
+            v-bind:index = "index"
+            ></star-s-item>
+        </div>
+        <!-- 3.日期选择界面 -->
+        <div class="select-window-main" v-show="timeSwitch">
+            <div class="select-time-title">
+                <button @click="getDate('last')">
+                    <div class="button-img button-left-img"></div>
+                </button>
+                <div>{{year}}-{{monthShow}}</div>
+                <button @click="getDate('next')">
+                    <div class="button-img button-right-img"></div>
+                </button>
+            </div>
+            <!-- 星期 -->
+            <div class="select-time-day">
+                <div>日</div>
+                <div>一</div>
+                <div>二</div>
+                <div>三</div>
+                <div>四</div>
+                <div>五</div>
+                <div>六</div>
+            </div>
+            <!-- 主要部分 -->
+            <div class="select-time-main">
+                <!-- 用于控制每月前的空位 -->
+                <div class="select-time-empty" id="selectTimeEmpty"></div>
+                <!-- 日期 -->
+                <time-s-item
+                v-for="(item,index) of timeSelectList"
+                v-bind:item = "item"
+                v-bind:index = "index"
+                ></time-s-item>
+            </div>
+            <div class="select-time-more">
+                <button @click="period" class="select-time-more-btn">选择时段</button>
+                <button @click="cycle" class="select-time-more-btn">选择循环</button>
+            </div>
+        </div>
+        <!-- 确定取消键，固定在最下面 -->
+        <button 
+        class="select-window-btn-1" 
+        v-on:click="btnSure"
+        >确定</button>
+        <button 
+        class="select-window-btn-0" 
+        v-on:click="btnClose"
+        >取消</button>
+    </div>
+    
+    <!-- 各类选择窗口导出的更多窗口 -->
+    <div class="more-window" id="moreWindow" v-show="show">
+        <!-- 清单-新建清单选择框 -->
+        <div class="more-window-main" id="moreWindowMain" v-show="tasksNewSwitch">
+            <!-- 编辑清单颜色和名字 -->
+            <input type="color" v-model="tasksNewColor">
+            <input type="text" v-model="tasksNewName" class="more-input" maxlength="10"/>
+        </div>
+        <!-- 清单 编辑框 -->
+        <div class="more-window-main" v-show="tasksEditSwitch">
+            <!-- 编辑清单颜色和名字 -->
+            <input type="color" v-model="tasksEditColor">
+            <input type="text" v-model="tasksEditValue" class="more-input" maxlength="10"/>
+            <div class="more-tasks-eidt-delate" @click="tasksEditDelate()">删除清单</div>
+        </div>
+        <!-- 清单 是否完成 -->
+        <div class="more-window-main more-star-finish"  v-show="tasksDeleteSwitch">
+            清单【{{tasksEditItem.tasksName}}】确认删除？
+            <div class="star-finish-tip">
+                确认删除清单会删除该清单下所有任务、目标以及移除目标任务目标(此操作不可逆转),是否执行操作？
+            </div>
+        </div>
+        <!-- 目标-新建目标选择框 -->
+        <div class="more-window-main" v-show="starNewSwitch">
+            <!-- 编辑目标所属清单、名字、时间 -->
+            <!-- 限制时间 (默认今天)-->
+            <div class="star-new-time" @click="starNewTimeF">{{starNewTimeYear}}-{{starNewTimeMonth}}-{{starNewTimeDate}}</div>
+            <!-- 所属清单 -->
+            <div class="star-new-tasks" @click="starNewTasksF">{{starNewTasks}}</div>
+            <div class="tasks-color-btn" :style=InputColorBackground()></div>
+            <!-- 目标内容 -->
+            <input type="text" v-model="starNewName" class="more-input" maxlength="10"/>
+        </div>
+        <!-- 目标 编辑 -->
+        <div class="more-window-main"  v-show="starEditSwitch">
+            <!-- 编辑目标所属清单、名字、时间 -->
+            <!-- 限制时间 (默认今天)-->
+            <div class="star-new-time" @click="starNewTimeF">{{starNewTimeYear}}-{{starNewTimeMonth}}-{{starNewTimeDate}}</div>
+            <!-- 所属清单 -->
+            <div class="star-new-tasks" @click="starNewTasksF">{{starNewTasks}}</div>
+            <div class="tasks-color-btn" v-bind:style=InputColorBackground()></div>
+            <!-- 目标内容 -->
+            <input type="text" v-model="starEditValue" class="more-input" maxlength="10"/>
+            <div class="more-tasks-eidt-delate" @click="starEditDelete">删除目标</div>
+        </div>
+        <!-- 目标 是否删除 -->
+        <div class="more-window-main more-star-finish"  v-show="starDeleteSwitch">
+            目标【{{starEditItem.starName}}】确认删除？
+            <div class="star-finish-tip">
+                确认删除会将该目标下所有任务目标移除(此操作不可逆转),是否执行操作？
+            </div>
+        </div>
+        <!-- 目标 是否完成 -->
+        <div class="more-window-main more-star-finish"  v-show="starFinishSwitch">
+            目标【{{starFinishItem.starName}}】确认完成？
+            <div class="star-finish-tip">
+                确认完成目标会删除该目标下所有未完成状态任务(此操作不可逆转),是否执行操作？
+            </div>
+        </div>
+        <!-- 时间-选择早中晚选择框 -->
+        <div class="more-window-main more-time" v-show="timePeriodSwitch">
+            <div @click="selectTimePeriod('none')" class="more-window-time-btn" id="morePeriod_0">无时期</div>
+            <div @click="selectTimePeriod('morning')" class="more-window-time-btn" id="morePeriod_1">上午</div>
+            <div @click="selectTimePeriod('afternoon')"class="more-window-time-btn" id="morePeriod_2">下午</div>
+            <div @click="selectTimePeriod('evening')" class="more-window-time-btn" id="morePeriod_3">晚上</div>
+        </div>
+        <!--时间 建立循环任务 -->
+        <div class="more-window-main" v-show="timeCycleSwitch">
+            任务间隔
+            <input type="text" v-model="timeCycleDays" class="more-input more-time-cycle-input" maxlength="3"/>
+            天循环一次
+        </div>
+        <!-- 编辑任务 -->
+        <div class="more-window-main more-task-edit" v-show="taskEditSwitch">
+            <div class="more-task-edit-box">
+                <button v-on:click="taskEditSelectTasks" class="more-task-edit-btn">{{taskEditTasks}}</button>
+                <button v-on:click="taskEditSelectStar" class="more-task-edit-btn">{{taskEditStar}}</button>
+                <button v-on:click="taskEditSelectTime" class="more-task-edit-btn">{{taskEditYear}}-{{taskEditMonth+1}}-{{taskEditDate}}{{taskEditPeriod}}{{taskEditCycle}}</button>
+             </div>
+            <input type="text" v-model="taskEditValue" class="more-task-edit-input" id="taskInput">
+            <div class="more-tasks-eidt-delate" @click="taskEditDelete">删除任务</div>
+        </div>
+       <!-- 确定取消键，固定在最下面 -->
+        <button
+        type="button"
+        class="more-window-btn-1"
+        v-on:click="moreWindowSure"
+        >确定</button>
+        <button
+        type="button"
+        class="more-window-btn-0"
+        v-on:click="moreWindowClose"
+        >取消</button>
+    </div>
+    
+    <!-- 主页面 -->
+    <div class="main" id="main">
+        <!-- 首栏 -->
+        <header>
+            <!-- 今日任务 -->
+            <button class="hf-img hf-list" id="icon-hf-today" onclick="hiconClick(this)"></button>
+            <!-- title -->
+            <h2>Todo List</h2>
+            <!-- 总结 -->
+            <button class="hf-img hf-user" id="icon-hf-summary" onclick="hiconClick(this)"></button>
+        </header>
+        
+        <!-- 页面 -->
+        <!-- 任务页 -->
+        <div class="page task" id="pageTask" v-show="pageSwitch">
+            <!-- 添加任务 -->
+            <div class="task-input-box">
+                <!-- v-model:双向绑定  inputValue为双向绑定的值，变动的话vue会替我们进行DOM操作，进行浏览器渲染-->
+                <!-- v-model 指令在表单控件元素上创建双向数据绑定。它会根据控件类型自动选取正确的方法来更新元素。 -->
+                <!-- 输入 -->
+                <div class="task-input-box-1">
+                    <div class="task-input-style"></div>
+                    <input type="text" v-model="value" class="task-input" id="taskInput" maxlength="15">
+                </div>
+                <!-- 更多 -->
+                <div class="task-input-box-2">
+                    <div>
+                        <!-- 清单 -->
+                        <button v-on:click="selectTasks" class="task-input-btn">{{tasks}}</button>
+                        <!-- 目标 -->
+                        <button v-on:click="selectStar" class="task-input-btn">{{star}}</button>
+                        <!-- 日期 -->
+                        <button v-on:click="selectTime" class="task-input-btn task-input-btn-1">{{time}}{{timePeriodStr}}{{timeCycleStr}}</button>
+                    </div>
+                    <!-- 提交相关信息 -->
+                    <button v-on:click="taskSubmit" class="task-input-btn task-input-btn-2">提交</button>
+                </div>
+                <!-- 给button定义一个点击时使用的方法 '@'是'v-on'的缩写,是触发事件的作用 -->
+            </div>
+            <!-- 展示任务 -->
+            <div class="tasks-main">
+                <!-- 上午 -->
+                <div class="tasks-box">
+                    <div class="tasks-name" @click="showList(0)">
+                        <div class="tasks-name-img tasks-name-morning-img"></div>
+                        <div class="tasks-name-text">上午</div>
+                    </div>
+                    <ul id="showList_0" class="tasks" style="height: 0px;">
+                        <div class="task-item" v-show="!morningList.length">今天上午没有任务~</div>
+                        <task-show
+                        v-for="(item,index) of morningList"
+                        v-bind:item = "item"
+                        v-bind:index = "index"
+                        showtask = "morning"
+                        ></task-show>
+                    </ul>
+                </div>
+                <!-- 下午 -->
+                <div class="tasks-box">
+                    <div class="tasks-name" @click="showList(1)">
+                        <div class="tasks-name-img tasks-name-afternoon-img"></div>
+                        <div class="tasks-name-text">下午</div>
+                    </div>
+                    <ul id="showList_1" class="tasks" style="height: 0px;">
+                        <div class="task-item" v-show="!afternoonList.length">今天下午没有任务~</div>
+                        <task-show
+                        v-for="(item,index) of afternoonList"
+                        v-bind:item = "item"
+                        v-bind:index = "index"
+                        showtask = "afternoon"
+                        ></task-show>
+                    </ul>
+                </div>
+                <!-- 晚上 -->
+                <div class="tasks-box">
+                    <div class="tasks-name" @click="showList(2)">
+                        <div class="tasks-name-img tasks-name-evening-img"></div>
+                        <div class="tasks-name-text">晚上</div>
+                    </div>
+                    <ul id="showList_2" class="tasks" style="height: 0px;">
+                       <div class="task-item" v-show="!eveningList.length">今天晚上没有任务~</div>
+                       <task-show
+                       v-for="(item,index) of eveningList"
+                       v-bind:item = "item"
+                       v-bind:index = "index"
+                       showtask = "evening"
+                       ></task-show>
+                    </ul>
+                </div>
+                <!-- 今日 -->
+                <div class="tasks-box">
+                    <div class="tasks-name" @click="showList(3)">
+                        <div class="tasks-name-img tasks-name-today-img"></div>
+                        <div class="tasks-name-text">今天</div>
+                    </div>
+                    <ul id="showList_3" class="tasks" style="height: 0px;">
+                        <div class="task-item" v-show="!todayList.length">今天没有任务~</div>
+                        <task-show
+                        v-for="(item,index) of todayList"
+                        v-bind:item = "item"
+                        v-bind:index = "index"
+                        showtask = "today"
+                        ></task-show>
+                    </ul>
+                </div>
+                <!-- 明日 -->
+                <div class="tasks-box">
+                    <div class="tasks-name" @click="showList(4)">
+                        <div class="tasks-name-img tasks-name-tomorrow-img"></div>
+                        <div class="tasks-name-text">明天</div>
+                    </div>
+                    <ul id="showList_4" class="tasks" style="height: 0px;">
+                       <div class="task-item" v-show="!tomorrowList.length">明天没有任务~</div>
+                       <task-show
+                       v-for="(item,index) of tomorrowList"
+                       v-bind:item = "item"
+                       v-bind:index = "index"
+                       showtask = "tomorrow"
+                       ></task-show>
+                    </ul>
+                </div>
+                <!-- 已过期 -->
+                <div class="tasks-box">
+                    <div class="tasks-name" @click="showList(5)">
+                        <div class="tasks-name-img tasks-name-past-img"></div>
+                        <div class="tasks-name-text">已过期</div>
+                    </div>
+                    <ul id="showList_5" class="tasks" style="height: 0px;">
+                       <div class="task-item" v-show="!pastList.length">没有过期任务~</div>
+                       <task-show
+                       v-for="(item,index) of pastList"
+                       v-bind:item = "item"
+                       v-bind:index = "index"
+                       showtask = "past"
+                       ></task-show>
+                    </ul>
+                </div>
+                <div class="task-tip">点击时段名称刷新时段任务~</div>
+           </div>
+        </div>
+        <!-- 目标页 -->
+        <div class="page star" id="pageStar" v-show="pageSwitch">
+            <!-- 无目标时展示词句 -->
+            <div v-show="noStar" class="star-notask">
+                现在还没有目标哦！
+            </div>
+            <button @click="newStar" class="star-btn">添加目标</button>
+            <button class="star-finish-btn" @click="starFinishSwitch">{{finishBtnText}}完成目标</button>
+            <!-- 有目标时展示目标 -->
+            <div class="star-show" v-show="!noStar">
+                <star-show
+                 v-for = " (item,index) of starList "
+                 v-bind:item = "item"
+                 v-bind:index = "index"
+                 v-bind:tasks = 'getStarMoreInfo("tasks",item)'
+                 v-bind:daynum = 'getStarMoreInfo("day",item)'
+                 v-bind:year = 'getStarMoreInfo("year",item)'
+                 v-bind:month = 'getStarMoreInfo("month",item)'
+                 v-bind:date = 'getStarMoreInfo("date",item)'
+                 v-bind:tasklist = "item.task"
+                 showtask = "star"
+                 ></star-show>
+            </div>
+            <div class="task-tip" v-show="!noStar">点击目标名称刷新目标任务~</div>
+        </div>
+        
+        <!-- 日历页 -->
+        <div class="page time" id="pageTime" v-show="pageSwitch">
+            <div class="time-title">
+                <button @click="getDate('last')">
+                    <div class="button-img button-left-img"></div>
+                </button>
+                <div>{{year}}-{{monthShow}}</div>
+                <button @click="getDate('next')">
+                    <div class="button-img button-right-img"></div>
+                </button>
+            </div>
+            <!-- 星期 -->
+            <div class="time-day">
+                <div>日</div>
+                <div>一</div>
+                <div>二</div>
+                <div>三</div>
+                <div>四</div>
+                <div>五</div>
+                <div>六</div>
+            </div>
+            <!-- 主要部分 -->
+            <div class="time-main">
+                <!-- 用于控制每月前的空位 -->
+                <div class="time-empty" id="timeShowBlock"></div>
+                <!-- 日期 -->
+                <time-item
+                v-for="(item,index) of timeMonthList"
+                v-bind:item = "item"
+                v-bind:index = "index"
+                ></time-item>
+            </div>
+            <!-- 当日任务 -->
+            <div class="time-task">
+                <day-task
+                v-for="(item,index) of dayTask"
+                v-bind:item = "item"
+                v-bind:index = "index"
+                showtask = "time"
+                ></day-task>
+                <div class="time-task-item" @click="timeTaskNew">新建当日任务</div>
+                <day-star
+                v-for="(item,index) of dayStar"
+                v-bind:item = "item"
+                v-bind:index = "index"
+                ></day-star>
+                <div class="time-task-item" @click="timeStarNew">新建当日目标</div>
+            </div>
+        </div>
+        <!-- 底栏 -->
+        <footer>
+            <button class="hf-img hf-star" id="iconHfStar" onclick="ficonClick(this)"></button>
+            <!-- 传入的这个this，是哪个this？之后看js高程解决 -->
+            <button class="hf-after hf-home" id="iconHfHome" onclick="ficonClick(this)"></button>
+            <!-- 默认进入后以主页开始 -->
+            <button class="hf-img hf-calendar" id="iconHfTime" onclick="ficonClick(this)"></button>
+        </footer>
+    </div>
+    <!-- js文件 -->
+    <script type="text/javascript" src="js/vue.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/index.js" charset="utf-8"></script>
+    
+</body>
+</html>
+
+
+

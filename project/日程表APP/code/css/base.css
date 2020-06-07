@@ -1,0 +1,60 @@
+/* 重置 */
+html{
+    font-size: 100%;
+    height: 100%;
+    width: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+button {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: none;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+* {box-sizing: border-box;}
+textarea {
+    border: none;
+    outline: none;
+}
+/* 雪碧图 */
+/* 首栏底栏 前后/ */
+.hf-img{background:url(../img/hf-img.png)  no-repeat;background-size:2.15rem 10.75rem}
+.hf-after{background:url(../img/hf-after.png)  no-repeat;background-size:2.15rem 10.75rem}
+.hf-star{height:2.15rem;width:2.15rem;background-position:0 0;}
+.hf-user{height:2.15rem;width:2.15rem;background-position:0 -2.15rem;}
+.hf-list{height:2.15rem;width:2.15rem;background-position:0 -4.3rem;}
+.hf-calendar{height:2.15rem;width:2.15rem;background-position:0 -6.45rem;}
+.hf-home{height:2.15rem;width:2.15rem;background-position:0 -8.6rem;}
+
+/* 任务页 清单名 */
+.tasks-name-img{background:url(../img/tasks-name-img.png)  no-repeat;background-size:1.5625rem 9.125rem}
+.tasks-name-past-img{height:1.5625rem;width:1.5625rem;background-position:0 0;}
+.tasks-name-today-img{height:1.5625rem;width:1.5625rem;background-position:0 -1.5625rem;}
+.tasks-name-tomorrow-img{height:1.5625rem;width:1.5625rem;background-position:0 -3.125rem;}
+.tasks-name-afternoon-img{height:1.5625rem;width:1.5625rem;background-position:0 -4.6875rem;}
+.tasks-name-evening-img{height:1.5625rem;width:1.5625rem;background-position:0 -6.25rem;}
+.tasks-name-morning-img{height:1.3125rem;width:1.5625rem;background-position:0 -7.8125rem;}
+/* 按钮 */
+.button-img{background:url(../img/button-img.png)  no-repeat;background-size:25px 75px}
+.button-total-img{background:url(../img/button-total-img.png)  no-repeat;background-size:25px 75px}
+.button-close-img{height:25px;width:25px;background-position:0 0;}
+.button-right-img{height:25px;width:25px;background-position:0 -25px;}
+.button-left-img{height:25px;width:25px;background-position:0 -50px;}
